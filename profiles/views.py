@@ -30,12 +30,12 @@ class AgreementView(APIView):
     
 #멘토인증
 class MentorVerificationView(APIView):
-    parser_classes = [MultiPartParser, FormParser]  # 파일 업로드
+    parser_classes = [MultiPartParser, FormParser]
     permission_classes = [AllowAny]
 
     def post(self, request):
-        serializer = MentorVerificationSerializer(data=request.data)
+        serializer = MentorVerificationSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
-            return Response({"message": "멘토 인증 정보가 저장되었습니다."}, status=status.HTTP_201_CREATED)
+            return Response({"message": "멘토 인증이 완료되었습니다."}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

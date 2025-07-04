@@ -31,9 +31,9 @@ class Profile(models.Model):
 #멘토 인증
 class MentorVerification(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    verification_file = models.FileField(upload_to='mentor_docs/', blank=True, null=True)
-    intro = models.TextField(blank=True, max_length=500)
+    introduction = models.TextField(blank=True)
+    document = models.FileField(upload_to='mentor_docs/', blank=True, null=True)  # 📌 핵심
     is_verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"멘토 인증 - {self.user.email}"
+        return f"{self.user.email} - Mentor Verification"
