@@ -10,7 +10,8 @@
 |--------|------|
 | `main` | 배포 및 릴리즈용 |
 | `dev`  | 기능 통합 브랜치 |
-| `feat/*` | 새로운 기능 개발 |
+| `feat/*` | 새로운 기능 개발(백) |
+| `design/*` | CSS 등 사용자 UI 디자인 변경(프론트) |
 | `fix/*`  | 버그 수정 |
 | `docs/*` | 문서 수정 |
 | `refactor/*` | 리팩토링 |
@@ -31,7 +32,7 @@ refactor/matching-service<br>
 | `fix` | 버그 수정 |
 | `docs` | 문서 수정 (README 등) |
 | `style` | 코드 포맷팅, 세미콜론 누락 등 |
-| `Design` | CSS 등 사용자 UI 디자인 변경 |
+| `design` | CSS 등 사용자 UI 디자인 변경 |
 | `refactor` | 코드 리팩토링 |
 | `test` | 테스트 코드 추가/수정 |
 | `chore` | 기타 설정, 빌드 파일 수정 등 |
