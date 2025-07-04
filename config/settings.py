@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'accounts',
-    'profiles',
+    'profiles.apps.ProfilesConfig',
     'matching',
 ]
 
