@@ -61,3 +61,15 @@ def skip_mentor_verification(request):
 
     MentorVerification.objects.create(user=user, is_skipped=True)
     return Response({"message": "멘토 인증 건너뛰기 완료"}, status=200)
+
+#멘토 인증 관리자 승인
+
+class MentorVerificationApproveView(APIView):
+    def put(self, request, user_id):
+        try:
+            verification = MentorVerification.objects.get(user__id=user_id)
+            verification.is_verified = True
+            verification.save()
+            return Response({"message": "멘토 인증이 승인되었습니다."}, status=status.HTTP_200_OK)
+        except MentorVerification.DoesNotExist:
+            return Response({"error": "해당 유저의 인증 정보가 없습니다."}, status=status.HTTP_404_NOT_FOUND)

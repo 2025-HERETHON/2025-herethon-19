@@ -32,8 +32,8 @@ class Profile(models.Model):
 class MentorVerification(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     introduction = models.TextField(blank=True)
-    document = models.FileField(upload_to='mentor_docs/', blank=True, null=True)  # 📌 핵심
-    is_verified = models.BooleanField(default=False)
+    document = models.FileField(upload_to='mentor_docs/', blank=True, null=True)  
+    is_verified = models.BooleanField(default=False)#관리자가 True로 설정해야지 멘토 인증 완료
 
     is_skipped = models.BooleanField(default=False)
 
