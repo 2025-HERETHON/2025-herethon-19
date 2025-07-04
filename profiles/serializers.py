@@ -53,11 +53,16 @@ class MentorVerificationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MentorVerification
-        fields = ['email', 'verification_file', 'intro']
+        fields = ['email', 'introduction', 'document']
 
     def create(self, validated_data):
         email = validated_data.pop('email')
         User = get_user_model()
         user = User.objects.get(email=email)
 
-        return MentorVerification.objects.create(user=user, **validated_data)
+        #중복 방지
+        verification, _ = MentorVerification.objects.update_or_create(
+            user=user,
+            defaults=validated_data
+        )
+        return verification
