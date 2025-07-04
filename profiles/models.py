@@ -35,5 +35,7 @@ class MentorVerification(models.Model):
     document = models.FileField(upload_to='mentor_docs/', blank=True, null=True)  # 📌 핵심
     is_verified = models.BooleanField(default=False)
 
+    is_skipped = models.BooleanField(default=False)
+
     def __str__(self):
         return f"{self.user.email} - Mentor Verification"
