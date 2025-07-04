@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Interest, Profile
 from django.contrib.auth import get_user_model
 
+#관심사
 class InterestSelectionSerializer(serializers.Serializer):
     email = serializers.EmailField()
     interest_ids = serializers.ListField(
@@ -23,4 +24,25 @@ class InterestSelectionSerializer(serializers.Serializer):
         user = User.objects.get(email=email)
         profile = Profile.objects.get(user=user)
         profile.interests.set(interests)
+        return profile
+
+#이용약관
+class AgreementSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    is_over_14 = serializers.BooleanField()
+    agreed_terms = serializers.BooleanField()
+    agreed_privacy = serializers.BooleanField()
+    agreed_marketing = serializers.BooleanField()
+
+    def save(self, **kwargs):
+        email = self.validated_data['email']
+        User = get_user_model()
+        user = User.objects.get(email=email)
+        profile, _ = Profile.objects.get_or_create(user=user)
+
+        profile.is_over_14 = self.validated_data['is_over_14']
+        profile.agreed_terms = self.validated_data['agreed_terms']
+        profile.agreed_privacy = self.validated_data['agreed_privacy']
+        profile.agreed_marketing = self.validated_data['agreed_marketing']
+        profile.save()
         return profile

@@ -21,3 +21,9 @@ class Interest(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     interests = models.ManyToManyField(Interest, blank=True)
+
+    # 약관 동의 필드 추가
+    agreed_terms = models.BooleanField(default=False)
+    is_over_14 = models.BooleanField(default=False)
+    agreed_privacy = models.BooleanField(default=False)
+    agreed_marketing = models.BooleanField(default=False)

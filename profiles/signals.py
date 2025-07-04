@@ -1,4 +1,4 @@
-#ustomUser가 생성될 때 자동으로 연결된 Profile도 생성
+#CustomUser가 생성될 때 자동으로 연결된 Profile도 생성
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
