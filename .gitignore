@@ -4,6 +4,9 @@ __pycache__/
 *.sqlite3
 *.log
 
+# 멘토 인증서 저장 폴더 무시
+mentor_docs/
+
 # Virtual Environment
 venv/
 

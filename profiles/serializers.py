@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Interest, Profile
+from .models import Interest, Profile, MentorVerification
 from django.contrib.auth import get_user_model
 
 #관심사
@@ -46,3 +46,18 @@ class AgreementSerializer(serializers.Serializer):
         profile.agreed_marketing = self.validated_data['agreed_marketing']
         profile.save()
         return profile
+
+#멘토 인증
+class MentorVerificationSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(write_only=True)
+
+    class Meta:
+        model = MentorVerification
+        fields = ['email', 'verification_file', 'intro']
+
+    def create(self, validated_data):
+        email = validated_data.pop('email')
+        User = get_user_model()
+        user = User.objects.get(email=email)
+
+        return MentorVerification.objects.create(user=user, **validated_data)

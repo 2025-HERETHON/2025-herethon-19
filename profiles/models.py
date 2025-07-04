@@ -27,3 +27,13 @@ class Profile(models.Model):
     is_over_14 = models.BooleanField(default=False)
     agreed_privacy = models.BooleanField(default=False)
     agreed_marketing = models.BooleanField(default=False)
+
+#멘토 인증
+class MentorVerification(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    verification_file = models.FileField(upload_to='mentor_docs/', blank=True, null=True)
+    intro = models.TextField(blank=True, max_length=500)
+    is_verified = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"멘토 인증 - {self.user.email}"
