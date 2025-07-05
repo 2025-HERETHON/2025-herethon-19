@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.my-info-cnt {
+  width: 272px;
+  height: 738px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  background: rgba(78, 198, 183, 0.1);
+}
+
+.right-aside-cnt {
+  display: block;
+  width: 776px;
+  padding: 62px;
+}
+
+.mymentor {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  background: #eefaf8;
+  padding: 25px;
+  p {
+    margin: 10px;
+  }
+}
+.mentors-cnt {
+  display: flex;
+  justify-content: space-around;
+}
+
+.mentors-box {
+  display: flex;
+}
+
+.mentor-pro {
+  text-align: center;
+
+  img {
+    margin-bottom: 10px;
+  }
+}
+
+.list-cnt {
+  margin: 36px;
+  border-bottom: 1px solid #ccc;
+}
