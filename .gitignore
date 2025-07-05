@@ -1,3 +1,11 @@
+
+
+# VSCode 설정 폴더 무시
+.vscode/
+
+# node_modules 무시 
+node_modules/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -20,3 +28,4 @@ venv/
 # OS
 .DS_Store
 Thumbs.db
+
