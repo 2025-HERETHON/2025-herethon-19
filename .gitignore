@@ -1,0 +1,8 @@
+# macOS 불필요한 파일 무시
+.DS_Store
+
+# VSCode 설정 폴더 무시
+.vscode/
+
+# node_modules 무시 
+node_modules/
