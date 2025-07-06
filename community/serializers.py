@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post, Keyword
+from .models import Post, Keyword,Comment
 
 class KeywordSerializer(serializers.ModelSerializer):
     class Meta:
@@ -43,3 +43,24 @@ class PostCreateSerializer(serializers.ModelSerializer):
             post.keywords.add(keyword)
 
         return post
+    
+class CommentSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = ['id', 'author', 'content', 'created_at']
+
+class PostDetailSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField()
+    keywords = KeywordSerializer(many=True, read_only=True)
+    comments = CommentSerializer(source='comment_set', many=True, read_only=True)
+
+    class Meta:
+        model = Post
+        fields = [
+            'id', 'title', 'content', 'author',
+            'created_at', 'like_count', 'comment_count',
+            'keywords', 'comments',
+        ]
+
