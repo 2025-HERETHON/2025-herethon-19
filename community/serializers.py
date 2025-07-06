@@ -4,7 +4,7 @@ from .models import Post, Keyword
 class KeywordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Keyword
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'category']  # category 필드 있으면 포함, 없으면 빼도 됨
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField()
@@ -23,8 +23,6 @@ class PostSerializer(serializers.ModelSerializer):
             'author',
         ]
 
-
-# 등록용 serializer (write용)
 class PostCreateSerializer(serializers.ModelSerializer):
     keywords = serializers.ListField(
         child=serializers.CharField(max_length=50),
@@ -37,8 +35,8 @@ class PostCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         keywords_data = validated_data.pop('keywords')
-        # author는 뷰에서 추가로 넘겨줌
-        post = Post.objects.create(**validated_data)
+        user = self.context['request'].user  # author는 뷰에서 전달받는 대신 여기서 받는 게 안전
+        post = Post.objects.create(author=user, **validated_data)
 
         for keyword_name in keywords_data:
             keyword, created = Keyword.objects.get_or_create(name=keyword_name)
