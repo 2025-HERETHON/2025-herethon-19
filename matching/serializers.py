@@ -48,8 +48,9 @@ class RecommendedMentorSerializer(serializers.ModelSerializer):
         fields = ['id', 'nickname', 'introduction', 'interests',
                   'matched_interest_count', 'like_count', 'final_score']
 
-#멘토 상세 페이지
+#멘토 매칭 상세 페이지
 class MentorDetailSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(source='user.id')
     nickname = serializers.CharField(source='user.nickname')
     interests = serializers.SerializerMethodField()
     introduction = serializers.CharField()

@@ -7,6 +7,7 @@ from django.db.models import Count
 from .pagination import MentorPagination
 from rest_framework.generics import RetrieveAPIView
 from profiles.models import MentorVerification
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -83,3 +84,10 @@ class MentorDetailView(RetrieveAPIView):
         context = super().get_serializer_context()
         context.update({"request": self.request})
         return context
+    
+    def get_object(self):
+        mentor_id = self.kwargs["mentor_id"] 
+        return get_object_or_404(
+            MentorVerification.objects.filter(is_verified=True),
+            user__id=mentor_id
+        )
