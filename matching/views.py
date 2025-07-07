@@ -2,8 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
-from profiles.models import Profile, MentorVerification
-from .serializers import RecommendedMentorSerializer
+from .serializers import RecommendedMentorSerializer, MentorLikeSerializer
 
 # Create your views here.
 
@@ -51,3 +50,14 @@ class RecommendedMentorListView(APIView):
         results.sort(key=lambda x: x.final_score, reverse=True)
         serializer = RecommendedMentorSerializer(results, many=True)
         return Response(serializer.data)
+    
+
+class MentorLikeView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        serializer = MentorLikeSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "좋아요가 등록되었습니다."}, status=201)
+        return Response(serializer.errors, status=400)

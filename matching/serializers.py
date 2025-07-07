@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from .models import MentorLike
 
 User = get_user_model()
 
@@ -12,3 +13,23 @@ class RecommendedMentorSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'nickname', 'introduction', 'interests', 'matched_interest_count', 'final_score']
+
+class MentorLikeSerializer(serializers.Serializer):
+    mentor_id = serializers.IntegerField()
+
+    def validate_mentor_id(self, value):
+        try:
+            user = User.objects.get(id=value)
+        except User.DoesNotExist:
+            raise serializers.ValidationError("해당 멘토가 존재하지 않습니다.")
+        if user.user_type != 'mentor':
+            raise serializers.ValidationError("해당 유저는 멘토가 아닙니다.")
+        return value
+
+    def create(self, validated_data):
+        mentee = self.context['request'].user
+        mentor = User.objects.get(id=validated_data['mentor_id'])
+        like, created = MentorLike.objects.get_or_create(mentee=mentee, mentor=mentor)
+        if not created:
+            raise serializers.ValidationError("이미 좋아요를 누른 멘토입니다.")
+        return like
