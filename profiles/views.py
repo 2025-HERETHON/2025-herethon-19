@@ -82,3 +82,16 @@ class MentorVerificationApproveView(APIView):
             return Response({"message": "멘토 인증이 승인되었습니다."}, status=status.HTTP_200_OK)
         except MentorVerification.DoesNotExist:
             return Response({"error": "해당 유저의 인증 정보가 없습니다."}, status=status.HTTP_404_NOT_FOUND)
+        
+#좌측 프로필 박스 정보 조회
+class MyProfileSimpleView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        profile = user.profile  
+
+        return Response({
+            "nickname": user.nickname,
+            "interests": [interest.name for interest in profile.interests.all()]
+        })
