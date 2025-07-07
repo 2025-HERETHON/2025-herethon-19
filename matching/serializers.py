@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import MentorLike
+from profiles.models import Profile, MentorVerification
+from matching.models import MentorLike
 
 User = get_user_model()
 
@@ -45,3 +47,28 @@ class RecommendedMentorSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'nickname', 'introduction', 'interests',
                   'matched_interest_count', 'like_count', 'final_score']
+
+#멘토 상세 페이지
+class MentorDetailSerializer(serializers.ModelSerializer):
+    nickname = serializers.CharField(source='user.nickname')
+    interests = serializers.SerializerMethodField()
+    introduction = serializers.CharField()
+    document_url = serializers.SerializerMethodField()
+    like_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = MentorVerification
+        fields = ['id', 'nickname', 'interests', 'introduction', 'document_url', 'like_count']
+
+    def get_interests(self, obj):
+        profile = Profile.objects.get(user=obj.user)
+        return [interest.name for interest in profile.interests.all()]
+
+    def get_document_url(self, obj):
+        if obj.document:
+            request = self.context.get('request')
+            return request.build_absolute_uri(obj.document.url)
+        return None
+
+    def get_like_count(self, obj):
+        return MentorLike.objects.filter(mentor=obj.user).count()

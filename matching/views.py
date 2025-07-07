@@ -2,9 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
-from .serializers import RecommendedMentorSerializer, MentorLikeSerializer
+from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer
 from django.db.models import Count
 from .pagination import MentorPagination
+from rest_framework.generics import RetrieveAPIView
+from profiles.models import MentorVerification
 
 # Create your views here.
 
@@ -71,3 +73,13 @@ class MentorLikeView(APIView):
             serializer.save()
             return Response({"message": "좋아요가 등록되었습니다."}, status=201)
         return Response(serializer.errors, status=400)
+    
+#멘토 매칭 상세 페이지
+class MentorDetailView(RetrieveAPIView):
+    queryset = MentorVerification.objects.filter(is_verified=True)
+    serializer_class = MentorDetailSerializer
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
