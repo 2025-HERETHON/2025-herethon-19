@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from .serializers import RecommendedMentorSerializer, MentorLikeSerializer
+from django.db.models import Count
 
 # Create your views here.
 
@@ -23,7 +24,10 @@ class RecommendedMentorListView(APIView):
         verified_mentors = User.objects.filter(
             user_type='mentor',
             mentorverification__is_verified=True
-        ).prefetch_related('profile__interests', 'mentorverification')
+        ).prefetch_related('profile__interests', 'mentorverification'
+        ).annotate(
+            like_count=Count('likes_received')
+        )   
 
         results = []
         for mentor in verified_mentors:
@@ -36,11 +40,13 @@ class RecommendedMentorListView(APIView):
 
             intro_score = 1 if mentor.mentorverification.introduction.strip() else 0
             category_match_score = len(my_categories & mentor_categories)
+            like_score = mentor.like_count * 2
 
             final_score = (
                 matched_interest_count * 3 +
                 intro_score * 1 +
-                category_match_score * 2
+                category_match_score * 2 +
+                like_score
             )
 
             mentor.matched_interest_count = matched_interest_count

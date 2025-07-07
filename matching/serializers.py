@@ -33,3 +33,15 @@ class MentorLikeSerializer(serializers.Serializer):
         if not created:
             raise serializers.ValidationError("이미 좋아요를 누른 멘토입니다.")
         return like
+
+class RecommendedMentorSerializer(serializers.ModelSerializer):
+    interests = serializers.StringRelatedField(many=True, source='profile.interests')
+    introduction = serializers.CharField(source='mentorverification.introduction', allow_blank=True)
+    matched_interest_count = serializers.IntegerField()
+    final_score = serializers.IntegerField()
+    like_count = serializers.IntegerField()
+
+    class Meta:
+        model = User
+        fields = ['id', 'nickname', 'introduction', 'interests',
+                  'matched_interest_count', 'like_count', 'final_score']
