@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from .serializers import RecommendedMentorSerializer, MentorLikeSerializer
 from django.db.models import Count
+from .pagination import MentorPagination
 
 # Create your views here.
 
@@ -16,7 +17,7 @@ class RecommendedMentorListView(APIView):
         user = request.user
         if user.user_type != 'mentee':
             return Response({"error": "멘티만 매칭 서비스를 사용할 수 있습니다."}, status=403)
-
+    
         my_interests = set(user.profile.interests.values_list('id', flat=True))
         my_categories = set(user.profile.interests.values_list('category', flat=True))
 
@@ -53,10 +54,13 @@ class RecommendedMentorListView(APIView):
             mentor.final_score = final_score
             results.append(mentor)
 
+        # 정렬 + 페이지네이션
         results.sort(key=lambda x: x.final_score, reverse=True)
-        serializer = RecommendedMentorSerializer(results, many=True)
-        return Response(serializer.data)
-    
+
+        paginator = MentorPagination()
+        page = paginator.paginate_queryset(results, request)
+        serializer = RecommendedMentorSerializer(page, many=True)
+        return paginator.get_paginated_response(serializer.data)    
 
 class MentorLikeView(APIView):
     permission_classes = [IsAuthenticated]
