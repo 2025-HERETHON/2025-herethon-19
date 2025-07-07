@@ -1,20 +1,19 @@
 from rest_framework.generics import CreateAPIView
-from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth import get_user_model, authenticate, logout
 from .serializers import SignupSerializer, LoginSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
-# 비밀번호 재설정 관련 import
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import send_mail
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .forms import PasswordResetRequestForm, SetNewPasswordForm
 from django.core.mail import send_mail
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 User = get_user_model()
 
@@ -99,3 +98,24 @@ def test_email(request):
         fail_silently=False,
     )
     return HttpResponse("이메일이 전송되었습니다.")
+
+#로그아웃
+def logout_api_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return JsonResponse({'message': '로그아웃 성공'}, status=200)
+    return JsonResponse({'error': '잘못된 요청'}, status=400)
+
+class LogoutView(APIView):
+    def post(self, request):
+        refresh_token = request.data.get("refresh")
+
+        if refresh_token is None:
+            return Response({"error": "Refresh 토큰이 필요합니다."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            token = RefreshToken(refresh_token)
+            token.blacklist()  
+            return Response({"message": "로그아웃 되었습니다."}, status=status.HTTP_200_OK)
+        except TokenError:
+            return Response({"error": "유효하지 않은 토큰입니다."}, status=status.HTTP_400_BAD_REQUEST)
