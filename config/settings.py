@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'matching',
     'community',
+    'mypage',
 ]
 
 MIDDLEWARE = [
