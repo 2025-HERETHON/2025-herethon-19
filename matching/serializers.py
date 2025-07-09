@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from .models import MentorLike, MatchingRequest
 from profiles.models import Profile, MentorVerification
 from matching.models import MentorLike, Review
+from point.utils import adjust_point
 
 User = get_user_model()
 
@@ -168,12 +169,25 @@ class ReviewSerializer(serializers.ModelSerializer):
         if match.status != 'accepted':
             raise serializers.ValidationError("매칭이 수락된 상태에서만 리뷰 작성이 가능합니다.")
 
-        if hasattr(match, 'review'):
+        if Review.objects.filter(match=match).exists():
             raise serializers.ValidationError("이미 리뷰를 작성하셨습니다.")
+
 
         return data
 
     def create(self, validated_data):
         match_id = self.context['view'].kwargs.get('match_id')
         match = MatchingRequest.objects.get(id=match_id)
-        return Review.objects.create(match=match, **validated_data)
+
+        #리뷰 생성되면
+        review = Review.objects.create(match=match, **validated_data)
+
+        #해당 멘토에게 포인트 적립
+        adjust_point(
+            user=match.mentor,
+            amount=5,
+            event_type="review_received",
+            description="멘티로부터 리뷰를 받았습니다."
+        )
+
+        return review

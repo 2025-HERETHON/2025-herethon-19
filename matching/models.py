@@ -40,7 +40,7 @@ class MatchingRequest(models.Model):
         return f"{self.mentee.nickname} → {self.mentor.nickname} ({self.status})"
     
 class Review(models.Model):
-    match = models.OneToOneField('MatchingRequest', on_delete=models.CASCADE)
+    match = models.OneToOneField(MatchingRequest, on_delete=models.CASCADE, related_name='review_obj')
     rating = models.IntegerField()
     comment = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

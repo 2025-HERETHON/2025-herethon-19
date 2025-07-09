@@ -9,8 +9,10 @@ from rest_framework.generics import RetrieveAPIView
 from profiles.models import MentorVerification
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from .models import MatchingRequest, Review
+from .models import MatchingRequest, Review, MentorLike
+from accounts.models import CustomUser
 from rest_framework.generics import CreateAPIView
+from point.utils import adjust_point
 
 # Create your views here.
 
@@ -72,11 +74,28 @@ class MentorLikeView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        serializer = MentorLikeSerializer(data=request.data, context={'request': request})
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"message": "좋아요가 등록되었습니다."}, status=201)
-        return Response(serializer.errors, status=400)
+        mentor_id = request.data.get('mentor_id')
+        if not mentor_id:
+            return Response({'error': 'mentor_id는 필수입니다.'}, status=400)
+
+        try:
+            mentor = CustomUser.objects.get(id=mentor_id, user_type='mentor')
+        except CustomUser.DoesNotExist:
+            return Response({'error': '해당 멘토를 찾을 수 없습니다.'}, status=404)
+
+        mentee = request.user
+        if mentor == mentee:
+            return Response({'error': '자기 자신에게 좋아요를 보낼 수 없습니다.'}, status=400)
+
+        #중복 좋아요 방지
+        like, created = MentorLike.objects.get_or_create(mentor=mentor, mentee=mentee)
+        if not created:
+            return Response({'message': '이미 좋아요를 보냈습니다.'}, status=200)
+
+        #포인트 적립
+        adjust_point(mentor, +5, 'like_received')
+
+        return Response({'message': '좋아요가 등록되었습니다.'}, status=201)
     
 #멘토 매칭 상세 페이지
 class MentorDetailView(RetrieveAPIView):
