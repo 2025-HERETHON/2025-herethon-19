@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from .models import MentorLike, MatchingRequest
 from profiles.models import Profile, MentorVerification
 from matching.models import MentorLike
+from accounts.models import CustomUser
 
 User = get_user_model()
 
@@ -102,3 +103,11 @@ class MatchingRequestCreateSerializer(serializers.ModelSerializer):
             mentor_id=mentor_id,
             status='pending'
         )
+
+#멘토가 받은 멘티 신청 목록 조회
+class ReceivedRequestSerializer(serializers.ModelSerializer):
+    mentee_nickname = serializers.CharField(source='mentee.nickname')
+
+    class Meta:
+        model = MatchingRequest
+        fields = ['id', 'mentee_nickname', 'created_at', 'status']
