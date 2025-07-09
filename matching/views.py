@@ -2,14 +2,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
-from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer, ReceivedRequestSerializer, MatchingResponseSerializer, MyMatchingStatusSerializer, ReviewSerializer
+from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer, ReceivedRequestSerializer, MatchingResponseSerializer, MyMatchingStatusSerializer, ReviewSerializer, ReviewDetailSerializer
 from django.db.models import Count
 from .pagination import MentorPagination
 from rest_framework.generics import RetrieveAPIView
 from profiles.models import MentorVerification
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from .models import MatchingRequest, Review, MentorLike
+from .models import MatchingRequest, Review, MentorLike, ReviewViewHistory
 from accounts.models import CustomUser
 from rest_framework.generics import CreateAPIView
 from point.utils import adjust_point
@@ -169,3 +169,39 @@ class ReviewCreateView(CreateAPIView):
 
     def get_queryset(self):
         return Review.objects.all()
+    
+#리뷰열람
+class ReviewOpenView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, review_id):
+        user = request.user
+
+        try:
+            review = Review.objects.select_related('match__mentor').get(id=review_id)
+        except Review.DoesNotExist:
+            return Response({'error': '리뷰가 존재하지 않습니다.'}, status=404)
+
+        if review.match.mentee == user:
+            return Response({'error': '본인이 작성한 리뷰는 열람할 수 없습니다.'}, status=400)
+
+        #열람 이력 확인
+        already_viewed = ReviewViewHistory.objects.filter(user=user, review=review).exists()
+
+        if not already_viewed:
+            #포인트 차감
+            if user.point < 5:
+                return Response({'error': '포인트가 부족합니다.'}, status=403)
+
+            adjust_point(
+                user=user,
+                amount=-5,
+                event_type="review_opened",
+                description=f"[리뷰 열람] {review.match.mentor.nickname} 멘토"
+            )
+
+            #열람 기록 저장
+            ReviewViewHistory.objects.create(user=user, review=review)
+
+        serializer = ReviewDetailSerializer(review)
+        return Response(serializer.data, status=200)

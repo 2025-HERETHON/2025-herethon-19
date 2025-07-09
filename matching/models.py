@@ -47,3 +47,13 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.match.mentor.nickname} by {self.match.mentee.nickname}"
+    
+
+#리뷰열람이력
+class ReviewViewHistory(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    review = models.ForeignKey('Review', on_delete=models.CASCADE)
+    viewed_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'review')  # 같은 리뷰는 한 번만 열람

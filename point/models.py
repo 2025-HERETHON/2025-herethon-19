@@ -20,3 +20,13 @@ class PointHistory(models.Model):
 
     def __str__(self):
         return f"{self.user.nickname} | {self.amount:+}P | {self.get_reason_display()}"
+    
+
+#리뷰열람여부
+class ReviewAccessLog(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    review = models.ForeignKey('matching.Review', on_delete=models.CASCADE)
+    accessed_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'review')  #하나의 리뷰에 대해 한 번만 접근 기록 가능

@@ -172,10 +172,10 @@ class ReviewSerializer(serializers.ModelSerializer):
         if Review.objects.filter(match=match).exists():
             raise serializers.ValidationError("이미 리뷰를 작성하셨습니다.")
 
-
         return data
 
     def create(self, validated_data):
+        request = self.context['request']
         match_id = self.context['view'].kwargs.get('match_id')
         match = MatchingRequest.objects.get(id=match_id)
 
@@ -190,4 +190,23 @@ class ReviewSerializer(serializers.ModelSerializer):
             description="멘티로부터 리뷰를 받았습니다."
         )
 
+         #리뷰 작성자(멘티)에게 포인트 적립
+        adjust_point(
+            user=request.user,
+            amount=5,
+            event_type='review_written',
+            description='멘토에게 리뷰를 작성했습니다.'
+        )
+
         return review
+    
+#리뷰열람
+class ReviewDetailSerializer(serializers.ModelSerializer):
+    mentor_nickname = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Review
+        fields = ['id', 'rating', 'comment', 'created_at', 'mentor_nickname']
+
+    def get_mentor_nickname(self, obj):
+        return obj.match.mentor.nickname
