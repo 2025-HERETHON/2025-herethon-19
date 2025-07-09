@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
-from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer, ReceivedRequestSerializer
+from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer, ReceivedRequestSerializer, MatchingResponseSerializer
 from django.db.models import Count
 from .pagination import MentorPagination
 from rest_framework.generics import RetrieveAPIView
@@ -119,3 +119,15 @@ class ReceivedRequestListView(APIView):
         requests = MatchingRequest.objects.filter(mentor=user).order_by('-created_at')
         serializer = ReceivedRequestSerializer(requests, many=True)
         return Response(serializer.data)
+    
+#멘토가 수락/거절
+class MatchingRespondView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        serializer = MatchingResponseSerializer(data=request.data)
+        if serializer.is_valid():
+            request_obj = serializer.save()
+            message = "매칭 요청을 수락했습니다." if request_obj.status == 'accepted' else "매칭 요청을 거절했습니다."
+            return Response({"message": message})
+        return Response(serializer.errors, status=400)

@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from .models import MentorLike, MatchingRequest
 from profiles.models import Profile, MentorVerification
 from matching.models import MentorLike
-from accounts.models import CustomUser
 
 User = get_user_model()
 
@@ -111,3 +110,24 @@ class ReceivedRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = MatchingRequest
         fields = ['id', 'mentee_nickname', 'created_at', 'status']
+
+#멘토가 수락/거절
+class MatchingResponseSerializer(serializers.Serializer):
+    request_id = serializers.IntegerField()
+    action = serializers.ChoiceField(choices=['accept', 'reject'])
+
+    def validate(self, data):
+        try:
+            request_obj = MatchingRequest.objects.get(id=data['request_id'])
+        except MatchingRequest.DoesNotExist:
+            raise serializers.ValidationError("해당 매칭 요청이 존재하지 않습니다.")
+        if request_obj.status != 'pending':
+            raise serializers.ValidationError("이미 처리된 요청입니다.")
+        return data
+
+    def save(self, **kwargs):
+        request_obj = MatchingRequest.objects.get(id=self.validated_data['request_id'])
+        action = self.validated_data['action']
+        request_obj.status = 'accepted' if action == 'accept' else 'rejected'
+        request_obj.save()
+        return request_obj
