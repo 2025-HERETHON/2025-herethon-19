@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import InterestSelectionSerializer, AgreementSerializer, MentorVerificationSerializer
+from .serializers import InterestSelectionSerializer, AgreementSerializer, MentorVerificationSerializer, MyInterestCombinedSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import api_view
 from .models import MentorVerification, Interest
@@ -23,7 +23,6 @@ class InterestSelectionView(APIView):
             return Response({"message": "관심사가 저장되었습니다."}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-#관심사 목록 조회
 class InterestListView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -31,6 +30,35 @@ class InterestListView(APIView):
         interests = Interest.objects.all()
         serializer = InterestSerializer(interests, many=True)
         return Response(serializer.data)
+
+#관심사 목록 조회
+class MyInterestListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        profile = user.profile
+        interests = profile.interests.all()
+        serializer = MyInterestsSerializer(interests, many=True)
+        return Response(serializer.data)
+
+#괸심사조회수정
+class MyInterestView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        profile = request.user.profile
+        serializer = MyInterestCombinedSerializer(profile)
+        return Response(serializer.data)
+
+    def patch(self, request):
+        profile = request.user.profile
+        serializer = MyInterestCombinedSerializer(profile, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': '관심사가 수정되었습니다.'})
+        return Response(serializer.errors, status=400)
+
 
 #약관동의
 class AgreementView(APIView):
@@ -133,3 +161,4 @@ class MyProfileSimpleView(APIView):
             "interests": [interest.name for interest in profile.interests.all()],
             "point": user.point
         })
+
