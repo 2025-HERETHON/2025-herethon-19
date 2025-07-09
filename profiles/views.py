@@ -93,5 +93,6 @@ class MyProfileSimpleView(APIView):
 
         return Response({
             "nickname": user.nickname,
-            "interests": [interest.name for interest in profile.interests.all()]
+            "interests": [interest.name for interest in profile.interests.all()],
+            "point": user.point
         })
