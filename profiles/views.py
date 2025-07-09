@@ -110,6 +110,12 @@ class MentorVerificationApproveView(APIView):
             verification = MentorVerification.objects.get(user__id=user_id)
             verification.is_verified = True
             verification.save()
+
+            #user_type을 'mentor'로 변경
+            user = verification.user
+            user.user_type = 'mentor'
+            user.save()
+
             return Response({"message": "멘토 인증이 승인되었습니다."}, status=status.HTTP_200_OK)
         except MentorVerification.DoesNotExist:
             return Response({"error": "해당 유저의 인증 정보가 없습니다."}, status=status.HTTP_404_NOT_FOUND)
