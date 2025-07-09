@@ -66,3 +66,9 @@ class MentorVerificationSerializer(serializers.ModelSerializer):
             defaults=validated_data
         )
         return verification
+    
+#관심사 리스트 조회
+class InterestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Interest
+        fields = ['id', 'name', 'category']

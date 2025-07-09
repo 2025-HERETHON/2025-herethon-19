@@ -1,14 +1,15 @@
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import InterestSelectionSerializer, AgreementSerializer, MentorVerificationSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import api_view
-from .models import MentorVerification
+from .models import MentorVerification, Interest
 from django.contrib.auth import get_user_model
+from .serializers import InterestSerializer
 # Create your views here.
-#관심사
+#관심사 선택
 class InterestSelectionView(APIView):
     permission_classes = [AllowAny]
 
@@ -18,6 +19,15 @@ class InterestSelectionView(APIView):
             serializer.save()
             return Response({"message": "관심사가 저장되었습니다."}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+#관심사 목록 조회
+class InterestListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        interests = Interest.objects.all()
+        serializer = InterestSerializer(interests, many=True)
+        return Response(serializer.data)
 
 #약관동의
 class AgreementView(APIView):
@@ -63,7 +73,6 @@ def skip_mentor_verification(request):
     return Response({"message": "멘토 인증 건너뛰기 완료"}, status=200)
 
 #멘토 인증 관리자 승인
-
 class MentorVerificationApproveView(APIView):
     def put(self, request, user_id):
         try:
@@ -73,3 +82,17 @@ class MentorVerificationApproveView(APIView):
             return Response({"message": "멘토 인증이 승인되었습니다."}, status=status.HTTP_200_OK)
         except MentorVerification.DoesNotExist:
             return Response({"error": "해당 유저의 인증 정보가 없습니다."}, status=status.HTTP_404_NOT_FOUND)
+        
+#좌측 프로필 박스 정보 조회
+class MyProfileSimpleView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        profile = user.profile  
+
+        return Response({
+            "nickname": user.nickname,
+            "interests": [interest.name for interest in profile.interests.all()],
+            "point": user.point
+        })

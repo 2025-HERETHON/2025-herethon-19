@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'matching',
     'community',
     'mypage',
+    'point',
 ]
 
 MIDDLEWARE = [
