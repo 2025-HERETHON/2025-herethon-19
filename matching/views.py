@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
-from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer, ReceivedRequestSerializer, MatchingResponseSerializer
+from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer, ReceivedRequestSerializer, MatchingResponseSerializer, MyMatchingStatusSerializer
 from django.db.models import Count
 from .pagination import MentorPagination
 from rest_framework.generics import RetrieveAPIView
@@ -131,3 +131,16 @@ class MatchingRespondView(APIView):
             message = "매칭 요청을 수락했습니다." if request_obj.status == 'accepted' else "매칭 요청을 거절했습니다."
             return Response({"message": message})
         return Response(serializer.errors, status=400)
+    
+#멘티가 내가 신청한 멘토와의 매칭 상태 확인
+class MyMatchingStatusView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        if user.user_type != 'mentee':
+            return Response({"error": "멘티만 조회 가능합니다."}, status=403)
+
+        requests = MatchingRequest.objects.filter(mentee=user).select_related('mentor')
+        serializer = MyMatchingStatusSerializer(requests, many=True)
+        return Response(serializer.data)

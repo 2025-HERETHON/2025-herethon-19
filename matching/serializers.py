@@ -131,3 +131,23 @@ class MatchingResponseSerializer(serializers.Serializer):
         request_obj.status = 'accepted' if action == 'accept' else 'rejected'
         request_obj.save()
         return request_obj
+    
+#멘티가 내가 신청한 멘토와의 매칭 상태 확인
+class MyMatchingStatusSerializer(serializers.ModelSerializer):
+    mentor_nickname = serializers.CharField(source='mentor.nickname')
+    mentor_email = serializers.SerializerMethodField()
+    mentor_phone = serializers.SerializerMethodField()
+
+    class Meta:
+        model = MatchingRequest
+        fields = ['id', 'mentor_nickname', 'status', 'mentor_email', 'mentor_phone']
+
+    def get_mentor_email(self, obj):
+        if obj.status == 'accepted':
+            return obj.mentor.email
+        return None
+
+    def get_mentor_phone(self, obj):
+        if obj.status == 'accepted':
+            return obj.mentor.phone_number  
+        return None
