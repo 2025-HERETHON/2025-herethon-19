@@ -2,15 +2,15 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
-from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer, ReceivedRequestSerializer, MatchingResponseSerializer, MyMatchingStatusSerializer
+from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer, ReceivedRequestSerializer, MatchingResponseSerializer, MyMatchingStatusSerializer, ReviewSerializer
 from django.db.models import Count
 from .pagination import MentorPagination
 from rest_framework.generics import RetrieveAPIView
 from profiles.models import MentorVerification
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from .models import MatchingRequest
-
+from .models import MatchingRequest, Review
+from rest_framework.generics import CreateAPIView
 
 # Create your views here.
 
@@ -144,3 +144,9 @@ class MyMatchingStatusView(APIView):
         requests = MatchingRequest.objects.filter(mentee=user).select_related('mentor')
         serializer = MyMatchingStatusSerializer(requests, many=True)
         return Response(serializer.data)
+    
+class ReviewCreateView(CreateAPIView):
+    serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        return Review.objects.all()

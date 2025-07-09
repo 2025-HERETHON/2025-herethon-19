@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import MentorLike, MatchingRequest
 from profiles.models import Profile, MentorVerification
-from matching.models import MentorLike
+from matching.models import MentorLike, Review
 
 User = get_user_model()
 
@@ -151,3 +151,29 @@ class MyMatchingStatusSerializer(serializers.ModelSerializer):
         if obj.status == 'accepted':
             return obj.mentor.phone_number  
         return None
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ['id', 'rating', 'comment', 'created_at']
+
+    def validate(self, data):
+        request = self.context['request']
+        match_id = self.context['view'].kwargs.get('match_id')
+        try:
+            match = MatchingRequest.objects.get(id=match_id, mentee=request.user)
+        except MatchingRequest.DoesNotExist:
+            raise serializers.ValidationError("해당 매칭을 찾을 수 없습니다.")
+
+        if match.status != 'accepted':
+            raise serializers.ValidationError("매칭이 수락된 상태에서만 리뷰 작성이 가능합니다.")
+
+        if hasattr(match, 'review'):
+            raise serializers.ValidationError("이미 리뷰를 작성하셨습니다.")
+
+        return data
+
+    def create(self, validated_data):
+        match_id = self.context['view'].kwargs.get('match_id')
+        match = MatchingRequest.objects.get(id=match_id)
+        return Review.objects.create(match=match, **validated_data)

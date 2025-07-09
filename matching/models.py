@@ -38,3 +38,12 @@ class MatchingRequest(models.Model):
 
     def __str__(self):
         return f"{self.mentee.nickname} → {self.mentor.nickname} ({self.status})"
+    
+class Review(models.Model):
+    match = models.OneToOneField('MatchingRequest', on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    comment = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review for {self.match.mentor.nickname} by {self.match.mentee.nickname}"
