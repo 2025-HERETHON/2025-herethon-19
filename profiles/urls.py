@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import InterestSelectionView, AgreementView, MentorVerificationView, skip_mentor_verification, MentorVerificationApproveView, InterestListView, MyProfileSimpleView
+from .views import InterestSelectionView, AgreementView, MentorVerificationView, skip_mentor_verification, MentorVerificationApproveView, InterestListView, MyProfileSimpleView, MentorVerificationUpdateView
 
 urlpatterns = [
     path('interests/', InterestSelectionView.as_view(), name='interest-select'),
@@ -9,4 +9,6 @@ urlpatterns = [
     path('mentor-verification/skip/', skip_mentor_verification, name='skip_mentor_verification'),
     path('mentor-verification/<int:user_id>/verify/', MentorVerificationApproveView.as_view()),
     path('profile/me/', MyProfileSimpleView.as_view(), name='my-profile-simple'),
+    path('mentor-verification/update/', MentorVerificationUpdateView.as_view(), name='mentor-verification-update'),
+
 ]

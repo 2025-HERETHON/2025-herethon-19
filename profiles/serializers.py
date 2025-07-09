@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import Interest, Profile, MentorVerification
 from django.contrib.auth import get_user_model
 
+User = get_user_model()
+
 #관심사
 class InterestSelectionSerializer(serializers.Serializer):
     email = serializers.EmailField()
@@ -66,6 +68,24 @@ class MentorVerificationSerializer(serializers.ModelSerializer):
             defaults=validated_data
         )
         return verification
+    
+
+#멘토링 인증 API(회원가입 때 멘토 인증 건너뛰기 한 멘토만)
+class MentorVerificationUpdateSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(write_only=True)
+
+    class Meta:
+        model = MentorVerification
+        fields = ['email', 'introduction', 'document']  
+
+    def update(self, instance, validated_data):
+        instance.introduction = validated_data.get('introduction', instance.introduction)
+        instance.document = validated_data.get('document', instance.document)
+        instance.is_skipped = False  # 건너뛰기 해제
+        instance.is_verified = False  # 검토 후 관리자 승인 필요
+        instance.save()
+        return instance
+
     
 #관심사 리스트 조회
 class InterestSerializer(serializers.ModelSerializer):

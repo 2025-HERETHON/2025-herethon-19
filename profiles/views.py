@@ -7,8 +7,11 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import api_view
 from .models import MentorVerification, Interest
 from django.contrib.auth import get_user_model
-from .serializers import InterestSerializer
+from .serializers import InterestSerializer, MentorVerificationUpdateSerializer
 # Create your views here.
+
+User = get_user_model()
+
 #관심사 선택
 class InterestSelectionView(APIView):
     permission_classes = [AllowAny]
@@ -51,7 +54,35 @@ class MentorVerificationView(APIView):
             serializer.save()
             return Response({"message": "멘토 인증이 완료되었습니다."}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+#멘토링 인증 API(회원가입 때 멘토 인증 건너뛰기 한 멘토만)
+class MentorVerificationUpdateView(APIView):
+    parser_classes = [MultiPartParser, FormParser]  
+
+    def patch(self, request):
+        email = request.data.get('email')
+        if not email:
+            return Response({'error': '이메일이 필요합니다.'}, status=400)
+
+        try:
+            user = User.objects.get(email=email)
+            mentor_verification = MentorVerification.objects.get(user=user)
+        except User.DoesNotExist:
+            return Response({'error': '해당 이메일의 사용자가 존재하지 않습니다.'}, status=404)
+        except MentorVerification.DoesNotExist:
+            return Response({'error': '멘토 인증 데이터가 존재하지 않습니다.'}, status=404)
+
+        serializer = MentorVerificationUpdateSerializer(
+            mentor_verification,
+            data=request.data,
+            partial=True
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': '멘토 인증 정보가 수정되었습니다.'})
+        return Response(serializer.errors, status=400)
+
+
 #건너뛰기
 User = get_user_model()
 
