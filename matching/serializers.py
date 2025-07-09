@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from .models import MentorLike
+from .models import MentorLike, MatchingRequest
 from profiles.models import Profile, MentorVerification
 from matching.models import MentorLike
 
@@ -73,3 +73,32 @@ class MentorDetailSerializer(serializers.ModelSerializer):
 
     def get_like_count(self, obj):
         return MentorLike.objects.filter(mentor=obj.user).count()
+    
+#멘토 신청
+class MatchingRequestCreateSerializer(serializers.ModelSerializer):
+    mentor_id = serializers.IntegerField(write_only=True)
+
+    class Meta:
+        model = MatchingRequest
+        fields = ['mentor_id']
+
+    def validate_mentor_id(self, value):
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+        if not User.objects.filter(id=value, user_type='mentor').exists():
+            raise serializers.ValidationError("존재하지 않는 멘토입니다.")
+        return value
+
+    def create(self, validated_data):
+        mentee = self.context['request'].user
+        mentor_id = validated_data['mentor_id']
+
+        #중복 신청 방지
+        if MatchingRequest.objects.filter(mentee=mentee, mentor_id=mentor_id).exists():
+            raise serializers.ValidationError("이미 해당 멘토에게 요청을 보냈습니다.")
+
+        return MatchingRequest.objects.create(
+            mentee=mentee,
+            mentor_id=mentor_id,
+            status='pending'
+        )

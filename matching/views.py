@@ -2,12 +2,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
-from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer
+from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer
 from django.db.models import Count
 from .pagination import MentorPagination
 from rest_framework.generics import RetrieveAPIView
 from profiles.models import MentorVerification
 from django.shortcuts import get_object_or_404
+from rest_framework import status
 
 # Create your views here.
 
@@ -91,3 +92,14 @@ class MentorDetailView(RetrieveAPIView):
             MentorVerification.objects.filter(is_verified=True),
             user__id=mentor_id
         )
+    
+#멘토신청
+class MatchingRequestCreateView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        serializer = MatchingRequestCreateSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "멘토에게 요청을 보냈습니다."}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
