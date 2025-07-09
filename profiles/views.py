@@ -31,17 +31,6 @@ class InterestListView(APIView):
         serializer = InterestSerializer(interests, many=True)
         return Response(serializer.data)
 
-#관심사 목록 조회
-class MyInterestListView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        user = request.user
-        profile = user.profile
-        interests = profile.interests.all()
-        serializer = MyInterestsSerializer(interests, many=True)
-        return Response(serializer.data)
-
 #괸심사조회수정
 class MyInterestView(APIView):
     permission_classes = [IsAuthenticated]
