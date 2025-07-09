@@ -8,6 +8,9 @@ from rest_framework.views import APIView
 from community.models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
 
+from rest_framework.permissions import IsAuthenticated
+from matching.models import MatchingRequest
+
 # 페이지네이션 클래스 정의 (페이지당 3개)
 class SmallResultsSetPagination(PageNumberPagination):
     page_size = 3
@@ -84,3 +87,26 @@ class DeleteLikeView(APIView):
                 return Response({'result': 'error', 'message': 'You have not liked this post'}, status=status.HTTP_400_BAD_REQUEST)
         except Post.DoesNotExist:
             return Response({'result': 'error', 'message': 'Post not found'}, status=status.HTTP_404_NOT_FOUND)
+
+#매칭된 멘토/멘티 리스트 조회
+class MyMentorOrMenteeListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+
+        if user.user_type == "mentor":
+            # 멘토 → 매칭된 멘티들
+            mentees = MatchingRequest.objects.filter(
+                mentor=user, status="accepted"
+            ).select_related('mentee')
+            mentee_nicknames = [m.mentee.nickname for m in mentees]
+            return Response({"my_mentees": mentee_nicknames})
+
+        else:
+            # 멘티 → 매칭된 멘토들
+            mentors = MatchingRequest.objects.filter(
+                mentee=user, status="accepted"
+            ).select_related('mentor')
+            mentor_nicknames = [m.mentor.nickname for m in mentors]
+            return Response({"my_mentors": mentor_nicknames})

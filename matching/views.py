@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
-from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer, ReceivedRequestSerializer, MatchingResponseSerializer, MyMatchingStatusSerializer, ReviewSerializer, ReviewDetailSerializer
+from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer, ReceivedRequestSerializer, MatchingResponseSerializer, MyMatchingStatusSerializer, ReviewSerializer, ReviewDetailSerializer, MyMenteeStatusSerializer
 from django.db.models import Count
 from .pagination import MentorPagination
 from rest_framework.generics import RetrieveAPIView
@@ -169,6 +169,20 @@ class ReviewCreateView(CreateAPIView):
 
     def get_queryset(self):
         return Review.objects.all()
+    
+#멘토가 멘티가 신청한 멘티와의 매칭 상태 확인
+class MyMenteeStatusView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        if user.user_type != 'mentor':
+            return Response({"error": "멘토만 조회 가능합니다."}, status=403)
+
+        requests = MatchingRequest.objects.filter(mentor=user).select_related('mentee')
+        serializer = MyMenteeStatusSerializer(requests, many=True)
+        return Response(serializer.data)
+
     
 #리뷰열람
 class ReviewOpenView(APIView):

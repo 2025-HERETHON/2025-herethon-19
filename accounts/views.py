@@ -1,6 +1,7 @@
 from rest_framework.generics import CreateAPIView
 from django.contrib.auth import get_user_model, authenticate, logout
-from .serializers import SignupSerializer, LoginSerializer
+from .serializers import SignupSerializer, LoginSerializer, UserUpdateSerializer
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -119,3 +120,19 @@ class LogoutView(APIView):
             return Response({"message": "로그아웃 되었습니다."}, status=status.HTTP_200_OK)
         except TokenError:
             return Response({"error": "유효하지 않은 토큰입니다."}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+#회원정보 수정
+class UserInfoUpdateView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserUpdateSerializer(request.user)
+        return Response(serializer.data)
+
+    def put(self, request):
+        serializer = UserUpdateSerializer(request.user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': '회원정보가 수정되었습니다.'})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

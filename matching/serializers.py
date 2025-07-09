@@ -152,6 +152,26 @@ class MyMatchingStatusSerializer(serializers.ModelSerializer):
         if obj.status == 'accepted':
             return obj.mentor.phone_number  
         return None
+    
+#멘토가 멘티가 신청한 멘티와의 매칭 상태 확인
+class MyMenteeStatusSerializer(serializers.ModelSerializer):
+    mentee_nickname = serializers.CharField(source='mentee.nickname')
+    mentee_email = serializers.SerializerMethodField()
+    mentee_phone = serializers.SerializerMethodField()
+
+    class Meta:
+        model = MatchingRequest
+        fields = ['id', 'mentee_nickname', 'status', 'mentee_email', 'mentee_phone']
+
+    def get_mentee_email(self, obj):
+        if obj.status == 'accepted':
+            return obj.mentee.email
+        return None
+
+    def get_mentee_phone(self, obj):
+        if obj.status == 'accepted':
+            return obj.mentee.phone_number
+        return None
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:

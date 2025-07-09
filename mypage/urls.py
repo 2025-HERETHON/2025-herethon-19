@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import (
     MyPostsListView, MyCommentsListView, MyLikesListView,
-    DeletePostView, DeleteCommentView, DeleteLikeView
+    DeletePostView, DeleteCommentView, DeleteLikeView,
+    MyMentorOrMenteeListView
 )
 
 urlpatterns = [
@@ -12,4 +13,7 @@ urlpatterns = [
     path('posts/<int:post_id>/', DeletePostView.as_view(), name='delete-post'),
     path('comments/<int:comment_id>/', DeleteCommentView.as_view(), name='delete-comment'),
     path('likes/<int:post_id>/', DeleteLikeView.as_view(), name='delete-like'),
+
+    path('matching-list/', MyMentorOrMenteeListView.as_view(), name='my-matching-list'),
+
 ]

@@ -29,3 +29,13 @@ class SignupSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
+
+#회원정보 조회 및 수정
+class UserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'nickname', 'phone_number']  # email은 read-only로도 가능
+
+        extra_kwargs = {
+            'email': {'read_only': True},  # 이메일은 수정 불가
+        }
