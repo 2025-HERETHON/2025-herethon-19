@@ -14,12 +14,13 @@
 2. [핵심 기능](#핵심-기능)
 3. [기술 스택](#기술-스택)
 4. [팀 소개](#팀-소개)
+5. [기타 정보](#기타-정보)
 
 ---
 
-##  프로젝트 소개
+## 프로젝트 소개
 
-HERizon은 **경력 단절 여성**이 다시 일할 수 있도록 돕는  
+**HERizon**은 **경력 단절 여성**이 다시 일할 수 있도록 돕는  
 **온라인 멘토링 & 커뮤니티 플랫폼**입니다.
 
 - **대상**: 30~40대 재취업 희망 여성
@@ -31,80 +32,86 @@ HERizon은 **경력 단절 여성**이 다시 일할 수 있도록 돕는
 
 ---
 
-##  핵심 기능
+## 핵심 기능
 
 | 기능 구분 | 설명 |
-|----------|------|
-|  멘토 탐색 & 신청 | 관심사 기반 멘토 리스트 제공, 1:1 신청 기능 |
-|  커뮤니티 게시판 | 태그 기반 글 작성, 정보/고민 공유 |
-|  포인트 리워드 | 활동 시 포인트 적립 → 기프티콘 교환 |
-|  멘토 인증 시스템 | 문서 업로드 및 관리자 승인 절차 |
-|  JWT 로그인 | 이메일/비밀번호 기반 사용자 인증 |
+|-----------|------|
+| 멘토 탐색 & 신청 | 관심사 기반 멘토 리스트 제공, 1:1 신청 기능 |
+| 커뮤니티 게시판 | 태그 기반 글 작성, 정보/고민 공유 |
+| 포인트 리워드 | 활동 시 포인트 적립 → 기프티콘 교환 |
+| 멘토 인증 시스템 | 문서 업로드 및 관리자 승인 절차 |
+| JWT 로그인 | 이메일/비밀번호 기반 사용자 인증 |
 
 ---
 
-##  기술 스택
+## 기술 스택
+
+<div>
+  <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white">
+  <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+  <img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+</div>
 
 | 분류 | 기술 |
 |------|------|
 | Backend | Python, Django, Django REST Framework |
 | Auth | JWT (djangorestframework-simplejwt) |
 | DB | SQLite (로컬 개발용) |
-| Frontend | html, css, js |
-| 기타 | Postman, GitHub Projects |
+| Frontend | HTML, CSS, JavaScript |
+| Tool | Postman, GitHub Projects |
 
 ---
 
 ## 팀 소개
 
-<table width = "100%" align="center">
+<table width="100%" align="center">
   <tr>
-    <td>
-      <a href="https://github.com/chldsbdud ">                 
-         
-      </a>
+    <td align="center">
+      <a href="https://github.com/chldsbdud">
+        <img src="https://avatars.githubusercontent.com/chldsbdud" width="120" />
+      </a><br/>
+      최윤영<br/>
+      프론트엔드
     </td>
-      <td>
-      <a href="https://github.com/muunseo ">                 
-           
-
-      </a>
+    <td align="center">
+      <a href="https://github.com/muunseo">
+        <img src="https://avatars.githubusercontent.com/muunseo" width="120" />
+      </a><br/>
+      김윤서<br/>
+      백엔드
     </td>
-    <td>
-      <a href="https://github.com/mang3858 ">                 
-          <
-      </a>
+    <td align="center">
+      <a href="https://github.com/mang3858">
+        <img src="https://avatars.githubusercontent.com/mang3858" width="120" />
+      </a><br/>
+      김소망<br/>
+      팀장, 백엔드<br/>회원가입/로그인, 매칭/포인트, 마이페이지
     </td>
-      <td>
-      <a href="https://github.com/rladmswl1116 ">                 
-                
-      </a>
+    <td align="center">
+      <a href="https://github.com/rladmswl1116">
+        <img src="https://avatars.githubusercontent.com/rladmswl1116" width="120" />
+      </a><br/>
+      김은지<br/>
+      기획/디자인
     </td>
-    <td>
-      <a href="https://github.com/sonyewoen ">                 
-               
-
-      </a>
+    <td align="center">
+      <a href="https://github.com/sonyewoen">
+        <img src="https://avatars.githubusercontent.com/sonyewoen" width="120" />
+      </a><br/>
+      손예원<br/>
+      프론트엔드
     </td>
-  </tr>
-  <tr>
-    <td align="center">최윤영</td>
-    <td align="center">김윤서</td>
-    <td align="center">김소망</td>
-    <td align="center">김은지</td>
-    <td align="center">손예원</td>
-  </tr>
-  <tr>
-    <td align="center">프론트엔드<br /> ㅇ </td>
-    <td align="center">백엔드<br /> ㅇ </td>
-    <td align="center">팀장, 백엔드<br />회원가입/로그인, 매칭/포인트 로직, 마이페이지</td>
-    <td align="center">기획/디자인<br /></td>
-    <td align="center">프론트엔드<br /> ㅇ</td>
   </tr>
 </table>
 
 ---
 
-##  기타 정보
+## 기타 정보
 
 - 본 프로젝트는 **2025 HERE+ETHON 해커톤**을 위해 제작되었습니다.
+- 개발 기간: **2025.06 ~ 2025.07.12**
+- 기능 개발과 기획, 디자인까지 전 팀원이 협업하여 완성한 프로젝트입니다.
+
