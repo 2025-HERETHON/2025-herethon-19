@@ -81,7 +81,7 @@ HERizon은 **경력 단절 여성**이 다시 일할 수 있도록 돕는
     </td>
     <td>
       <a href="https://github.com/sonyewoen ">                 
-          <img src="https://avatars.githubusercontent.com/sonyewoen" width="160" />            
+          <img src="C:\Users\Administrator\OneDrive\바탕 화면\손예원.svg" width="160" />            
       </a>
     </td>
   </tr>
@@ -90,7 +90,7 @@ HERizon은 **경력 단절 여성**이 다시 일할 수 있도록 돕는
     <td align="center">김윤서</td>
     <td align="center">김소망</td>
     <td align="center">김은지</td>
-    <td align="center">예원</td>
+    <td align="center">손손예원</td>
   </tr>
   <tr>
     <td align="center">프론트엔드<br /> ㅇ </td>
