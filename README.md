@@ -1,5 +1,6 @@
 # HERizon
-<img width="605" height="432" alt="image" src="https://github.com/user-attachments/assets/f24d6ddc-8b73-41e5-9a89-59efe773ddd3" />
+<img width="1920" height="1080" alt="메인 페이지 (로그인 전)" src="https://github.com/user-attachments/assets/c1e8add2-435f-4b3d-a3ff-35cfe996c9fa" />
+
 
 
 > **HER + Empowerment**  
@@ -37,17 +38,24 @@
 ## 핵심 기능
 
 ### 멘토 탐색 & 신청
-<img width="576" height="546" alt="image" src="https://github.com/user-attachments/assets/1e5df22a-a585-4637-bcf2-d5647809939f" /> </br>
-<img width="573" height="610" alt="image" src="https://github.com/user-attachments/assets/aebbd622-b474-4416-8d77-e08c3d8556c0" />
+<img width="1920" height="1772" alt="멘토·멘티 둘러보기" src="https://github.com/user-attachments/assets/161148af-ef8e-4d6b-803e-bc18d2b4f200" />
+ </br>
+<img width="1920" height="2078" alt="멘토 상세 페이지" src="https://github.com/user-attachments/assets/8812b750-f7f3-44c6-9476-fa9099f025c5" /></br>
+<img width="1920" height="1080" alt="멘토링 활동 - 멘토 설정" src="https://github.com/user-attachments/assets/81329d7d-f767-493e-89c7-ff7f1bd080d0" />
+
+
 - 관심사 기반 멘토 리스트 제공, 1:1 신청 기능
 
 ### 커뮤니티 게시판
-<img width="609" height="568" alt="image" src="https://github.com/user-attachments/assets/b60bfa3e-931c-4db6-9e50-5229f7711b24" /></br>
+<img width="1920" height="1710" alt="커뮤니티 (메인 _ 둘러보기)" src="https://github.com/user-attachments/assets/bfc125f1-d2c8-4d43-a4d7-a208834a9e0e" />
+</br>
 - 태그 기반 글 작성, 정보/고민 공유
 
 ### 포인트 리워드
-<img width="638" height="517" alt="image" src="https://github.com/user-attachments/assets/703d1550-95f2-4d64-8f51-dd574f6a8cc4" /></br>
-<img width="677" height="621" alt="image" src="https://github.com/user-attachments/assets/1b8ce4d4-88c0-4199-ab31-bce974788edf" />
+<img width="1920" height="1360" alt="멘토링 활동 - 포인트 내역" src="https://github.com/user-attachments/assets/0e26919b-bd84-44c5-9cd0-d37a579e20c6" />
+</br>
+<img width="1920" height="1666" alt="기프티콘" src="https://github.com/user-attachments/assets/1ca6d177-9872-4dff-8ade-fffe915b42c2" />
+
 - 활동 시 포인트 적립 → 기프티콘 교환
 
 ### 멘토 인증 시스템
