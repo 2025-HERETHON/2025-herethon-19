@@ -25,7 +25,6 @@ class SignupSerializer(serializers.ModelSerializer):
         return user
 
 #로그인
-
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
@@ -39,3 +38,13 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'email': {'read_only': True},  # 이메일은 수정 불가
         }
+
+
+#회원탈퇴
+class UserDeleteSerializer(serializers.Serializer):
+    confirm = serializers.BooleanField()
+
+    def validate_confirm(self, value):
+        if not value:
+            raise serializers.ValidationError("유의사항 동의가 필요합니다.")
+        return value
