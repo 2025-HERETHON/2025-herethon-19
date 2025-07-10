@@ -33,6 +33,7 @@
 ---
 
 ## 핵심 기능
+**관련 사진은 프로토 타입입니다. 실제 개발 화면과 다를 수 있습니다.
 
 ### 멘토 탐색 & 신청
 <img width="1920" height="1772" alt="멘토·멘티 둘러보기" src="https://github.com/user-attachments/assets/161148af-ef8e-4d6b-803e-bc18d2b4f200" />
