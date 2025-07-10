@@ -80,39 +80,44 @@
 <table width="100%" align="center">
   <tr>
     <td align="center">
-      <a href="https://github.com/chldsbdud">
-        <img src="https://avatars.githubusercontent.com/chldsbdud" width="120" />
+      <a href="https://github.com/mang3858">
+        <img src="https://avatars.githubusercontent.com/mang3858" width="120" />
       </a><br/>
-      최윤영<br/>
-      프론트엔드
+      김소망<br/>
+      팀장, 백엔드<br/>
+      <small>회원가입/로그인, 매칭/포인트, 마이페이지</small>
     </td>
     <td align="center">
       <a href="https://github.com/muunseo">
         <img src="https://avatars.githubusercontent.com/muunseo" width="120" />
       </a><br/>
       김윤서<br/>
-      백엔드
+      백엔드<br/>
+      <small>커뮤니티, 마이페이지</small>
     </td>
     <td align="center">
-      <a href="https://github.com/mang3858">
-        <img src="https://avatars.githubusercontent.com/mang3858" width="120" />
+      <a href="https://github.com/chldsbdud">
+        <img src="https://avatars.githubusercontent.com/chldsbdud" width="120" />
       </a><br/>
-      김소망<br/>
-      팀장, 백엔드<br/>회원가입/로그인, 매칭/포인트, 마이페이지
-    </td>
-    <td align="center">
-      <a href="https://github.com/rladmswl1116">
-        <img src="https://avatars.githubusercontent.com/rladmswl1116" width="120" />
-      </a><br/>
-      김은지<br/>
-      기획/디자인
+      최윤영<br/>
+      프론트엔드<br/>
+      <small>커뮤니티</small>
     </td>
     <td align="center">
       <a href="https://github.com/sonyewoen">
         <img src="https://avatars.githubusercontent.com/sonyewoen" width="120" />
       </a><br/>
       손예원<br/>
-      프론트엔드
+      프론트엔드<br/>
+      <small>회원가입/로그인</small>
+    </td>
+    <td align="center">
+      <a href="https://github.com/rladmswl1116">
+        <img src="https://avatars.githubusercontent.com/rladmswl1116" width="120" />
+      </a><br/>
+      김은지<br/>
+      기획/디자인<br/>
+      <small>와이어프레임, UI/UX 디자인</small>
     </td>
   </tr>
 </table>
