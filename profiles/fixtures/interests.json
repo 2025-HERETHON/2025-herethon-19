@@ -1,0 +1,266 @@
+[
+{
+  "model": "profiles.interest",
+  "pk": 1,
+  "fields": {
+    "name": "프론트엔드 개발",
+    "category": "it"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 2,
+  "fields": {
+    "name": "백엔드 개발",
+    "category": "it"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 3,
+  "fields": {
+    "name": "웹 개발",
+    "category": "it"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 4,
+  "fields": {
+    "name": "앱 개발",
+    "category": "it"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 5,
+  "fields": {
+    "name": "데이터 분석",
+    "category": "it"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 6,
+  "fields": {
+    "name": "인공지능",
+    "category": "it"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 7,
+  "fields": {
+    "name": "기획",
+    "category": "business"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 8,
+  "fields": {
+    "name": "마케팅",
+    "category": "business"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 9,
+  "fields": {
+    "name": "PM",
+    "category": "business"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 10,
+  "fields": {
+    "name": "창업",
+    "category": "business"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 11,
+  "fields": {
+    "name": "디자인",
+    "category": "creative"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 12,
+  "fields": {
+    "name": "UX/UI",
+    "category": "creative"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 13,
+  "fields": {
+    "name": "브랜딩",
+    "category": "creative"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 14,
+  "fields": {
+    "name": "콘텐츠 제작",
+    "category": "creative"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 15,
+  "fields": {
+    "name": "교육직/강사",
+    "category": "career"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 16,
+  "fields": {
+    "name": "행사/사무",
+    "category": "career"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 17,
+  "fields": {
+    "name": "고객 서비스",
+    "category": "career"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 18,
+  "fields": {
+    "name": "워킹맘",
+    "category": "career"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 19,
+  "fields": {
+    "name": "부캐 도전",
+    "category": "career"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 20,
+  "fields": {
+    "name": "육아 이후 복귀",
+    "category": "career"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 21,
+  "fields": {
+    "name": "자기소개서",
+    "category": "job"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 22,
+  "fields": {
+    "name": "포트폴리오",
+    "category": "job"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 23,
+  "fields": {
+    "name": "모의 면접",
+    "category": "job"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 24,
+  "fields": {
+    "name": "면접 코칭",
+    "category": "job"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 25,
+  "fields": {
+    "name": "취업 준비",
+    "category": "job"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 26,
+  "fields": {
+    "name": "이직 준비",
+    "category": "job"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 27,
+  "fields": {
+    "name": "업무 스킬",
+    "category": "job"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 28,
+  "fields": {
+    "name": "시간관리",
+    "category": "growth"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 29,
+  "fields": {
+    "name": "자기 계발",
+    "category": "growth"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 30,
+  "fields": {
+    "name": "공부 루틴",
+    "category": "growth"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 31,
+  "fields": {
+    "name": "멘탈 케어",
+    "category": "growth"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 32,
+  "fields": {
+    "name": "스터디",
+    "category": "growth"
+  }
+},
+{
+  "model": "profiles.interest",
+  "pk": 33,
+  "fields": {
+    "name": "커뮤니케이션",
+    "category": "growth"
+  }
+}
+]
