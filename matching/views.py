@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
-from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer, ReceivedRequestSerializer, MatchingResponseSerializer, MyMatchingStatusSerializer, ReviewSerializer, ReviewDetailSerializer, MyMenteeStatusSerializer
+from .serializers import RecommendedMentorSerializer, MentorLikeSerializer, MentorDetailSerializer, MatchingRequestCreateSerializer, ReceivedRequestSerializer, MatchingResponseSerializer, MyMatchingStatusSerializer, ReviewSerializer, ReviewDetailSerializer, MyMenteeStatusSerializer, MenteeCancelMatchingSerializer, MentorCancelMatchingSerializer
 from django.db.models import Count
 from .pagination import MentorPagination
 from rest_framework.generics import RetrieveAPIView
@@ -219,3 +219,24 @@ class ReviewOpenView(APIView):
 
         serializer = ReviewDetailSerializer(review)
         return Response(serializer.data, status=200)
+    
+class MenteeCancelMatchingView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        serializer = MenteeCancelMatchingSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "매칭이 종료되었습니다."}, status=200)
+        return Response(serializer.errors, status=400)
+
+
+class MentorCancelMatchingView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        serializer = MentorCancelMatchingSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "매칭이 종료되었습니다."}, status=200)
+        return Response(serializer.errors, status=400)

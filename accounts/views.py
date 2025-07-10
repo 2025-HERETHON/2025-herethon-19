@@ -1,6 +1,6 @@
 from rest_framework.generics import CreateAPIView
 from django.contrib.auth import get_user_model, authenticate, logout
-from .serializers import SignupSerializer, LoginSerializer, UserUpdateSerializer
+from .serializers import SignupSerializer, LoginSerializer, UserUpdateSerializer, UserDeleteSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -15,6 +15,8 @@ from django.shortcuts import render
 from .forms import PasswordResetRequestForm, SetNewPasswordForm
 from django.core.mail import send_mail
 from django.http import HttpResponse, JsonResponse
+
+from matching.models import MatchingRequest
 
 User = get_user_model()
 
@@ -135,4 +137,27 @@ class UserInfoUpdateView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({'message': '회원정보가 수정되었습니다.'})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+#회원탈퇴
+class UserDeleteView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request):
+        serializer = UserDeleteSerializer(data=request.data)
+        if serializer.is_valid():
+            user = request.user
+
+            #매칭요청 상태 모두 'rejected' 처리
+            MatchingRequest.objects.filter(mentor=user).update(status='rejected')
+            MatchingRequest.objects.filter(mentee=user).update(status='rejected')
+
+            #유저 소프트 삭제
+            user.is_active = False
+            user.save()
+
+            return Response({"message": "회원 탈퇴가 완료되었고, 관련 매칭 요청이 모두 종료 처리되었습니다."},
+                            status=status.HTTP_200_OK)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

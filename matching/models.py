@@ -33,6 +33,8 @@ class MatchingRequest(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
 
+    cancel_reason = models.CharField(max_length=300, null=True, blank=True)  # 취소 사유
+
     class Meta:
         unique_together = ('mentor', 'mentee')  #중복 요청 방지
 

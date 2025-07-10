@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RecommendedMentorListView, MentorLikeView, MentorDetailView, MatchingRequestCreateView, ReceivedRequestListView, MatchingRespondView, MyMatchingStatusView, ReviewCreateView, ReviewOpenView, MyMenteeStatusView
+from .views import RecommendedMentorListView, MentorLikeView, MentorDetailView, MatchingRequestCreateView, ReceivedRequestListView, MatchingRespondView, MyMatchingStatusView, ReviewCreateView, ReviewOpenView, MyMenteeStatusView, MenteeCancelMatchingView, MentorCancelMatchingView
 
 urlpatterns = [
     path('recommend/', RecommendedMentorListView.as_view(), name='recommended-mentors'),
@@ -12,4 +12,6 @@ urlpatterns = [
     path('matching-status/mentee/', MyMenteeStatusView.as_view(), name='my_mentee_status'),#매칭상태확인(멘토입장)
     path('review/<int:match_id>/', ReviewCreateView.as_view(), name='review-create'),
     path('review/<int:review_id>/open/', ReviewOpenView.as_view(), name='review-open'),
+    path('cancel/mentee/', MenteeCancelMatchingView.as_view()),
+    path('cancel/mentor/', MentorCancelMatchingView.as_view()),
 ]
