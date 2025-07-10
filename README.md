@@ -46,14 +46,6 @@
 
 ## 기술 스택
 
-| 분류 | 기술 |
-|------|------|
-| Backend | Python, Django, Django REST Framework |
-| Auth | JWT (djangorestframework-simplejwt) |
-| DB | SQLite (로컬 개발용) |
-| Frontend | HTML, CSS, JavaScript |
-| Tool | Postman, GitHub Projects |
-
 ### 프론트엔드
 <div align="left">
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
@@ -80,6 +72,7 @@
   <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"/>
   <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
 </div>
+
 ---
 
 ## 팀 소개
