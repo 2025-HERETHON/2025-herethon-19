@@ -11,6 +11,7 @@ from .serializers import PostDetailSerializer, CommentSerializer
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
+from point.models import PointHistory
 
 class PostListView(generics.ListAPIView):
     queryset = Post.objects.all().order_by('-created_at')
@@ -54,6 +55,8 @@ class CommentCreateView(APIView):
 def toggle_like(request, post_id):
     post = Post.objects.get(id=post_id)
     user = request.user
+    author = post.author
+
     if user in post.likes.all():
         post.likes.remove(user)
         post.like_count = post.likes.count()
@@ -63,4 +66,18 @@ def toggle_like(request, post_id):
         post.likes.add(user)
         post.like_count = post.likes.count()
         post.save()
+
+        # 자기 글이 아니면 포인트 지급
+        if user != author:
+            author.point += 5
+            author.save()
+
+            PointHistory.objects.create(
+                user=author,
+                amount=5,
+                reason='community_like_received',
+                event_type='like',
+                description=f"{user.nickname}님이 '{post.title}'에 좋아요를 눌렀습니다."
+            )
+
         return Response({"message": "좋아요", "liked": True})

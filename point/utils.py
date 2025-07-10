@@ -1,11 +1,14 @@
 from .models import PointHistory
 
 REASON_MAPPING = {
+    
     'like_received': '좋아요 받음',
     'match_request_received': '멘토링 요청 받음',
     'review_written': '리뷰 작성',
     'review_received': '리뷰 받음',
     'review_opened': '리뷰 열람',
+    'community_like_received': '커뮤니티 좋아요 받음',
+    
 }
 
 def adjust_point(user, amount, event_type=None, description=""):
