@@ -61,28 +61,28 @@ HERizon은 **경력 단절 여성**이 다시 일할 수 있도록 돕는
   <tr>
     <td>
       <a href="https://github.com/chldsbdud ">                 
-          <img src="https://github.com/user-attachments/assets/be0a9a27-6c40-43bf-9cce-f689be0f7f99" width="160" />  
+         
       </a>
     </td>
       <td>
       <a href="https://github.com/muunseo ">                 
-          <img src="https://github.com/user-attachments/assets/63e9dcf5-9606-40f7-9996-68cd069bf895" width="160" />           
+           
 
       </a>
     </td>
     <td>
       <a href="https://github.com/mang3858 ">                 
-          <img src="https://github.com/user-attachments/assets/e6f8e920-5a63-4ddd-884e-6380d1b90334" width="160" />
+          <
       </a>
     </td>
       <td>
       <a href="https://github.com/rladmswl1116 ">                 
-          <img src="https://avatars.githubusercontent.com/rladmswl1116" width="160" />            
+                
       </a>
     </td>
     <td>
       <a href="https://github.com/sonyewoen ">                 
-          <img src="C:\Users\Administrator\OneDrive\바탕 화면\손예원.svg" width="160" />            
+               
 
       </a>
     </td>
