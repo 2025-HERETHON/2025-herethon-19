@@ -1,7 +1,7 @@
 from rest_framework.generics import CreateAPIView
 from django.contrib.auth import get_user_model, authenticate, logout
 from .serializers import SignupSerializer, LoginSerializer, UserUpdateSerializer, UserDeleteSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -22,7 +22,8 @@ User = get_user_model()
 
 # Create your views here.
 class SignupView(CreateAPIView):
-    queryset = get_user_model().objects.all()
+    #queryset = get_user_model().objects.all()
+    permission_classes = [AllowAny]
     serializer_class = SignupSerializer
 
 #로그인
