@@ -1,4 +1,6 @@
 # HERizon
+<img width="605" height="432" alt="image" src="https://github.com/user-attachments/assets/f24d6ddc-8b73-41e5-9a89-59efe773ddd3" />
+
 
 > **HER + Empowerment**  
 > **경력 단절 여성의 커리어 성장을 위한 온라인 멘토링 & 커뮤니티 플랫폼**
@@ -34,13 +36,23 @@
 
 ## 핵심 기능
 
-| 기능 구분 | 설명 |
-|-----------|------|
-| 멘토 탐색 & 신청 | 관심사 기반 멘토 리스트 제공, 1:1 신청 기능 |
-| 커뮤니티 게시판 | 태그 기반 글 작성, 정보/고민 공유 |
-| 포인트 리워드 | 활동 시 포인트 적립 → 기프티콘 교환 |
-| 멘토 인증 시스템 | 문서 업로드 및 관리자 승인 절차 |
-| JWT 로그인 | 이메일/비밀번호 기반 사용자 인증 |
+### 멘토 탐색 & 신청
+<img width="576" height="546" alt="image" src="https://github.com/user-attachments/assets/1e5df22a-a585-4637-bcf2-d5647809939f" /> </br>
+<img width="573" height="610" alt="image" src="https://github.com/user-attachments/assets/aebbd622-b474-4416-8d77-e08c3d8556c0" />
+- 관심사 기반 멘토 리스트 제공, 1:1 신청 기능
+
+### 커뮤니티 게시판
+<img width="609" height="568" alt="image" src="https://github.com/user-attachments/assets/b60bfa3e-931c-4db6-9e50-5229f7711b24" /></br>
+- 태그 기반 글 작성, 정보/고민 공유
+
+### 포인트 리워드
+<img width="638" height="517" alt="image" src="https://github.com/user-attachments/assets/703d1550-95f2-4d64-8f51-dd574f6a8cc4" /></br>
+<img width="677" height="621" alt="image" src="https://github.com/user-attachments/assets/1b8ce4d4-88c0-4199-ab31-bce974788edf" />
+- 활동 시 포인트 적립 → 기프티콘 교환
+
+### 멘토 인증 시스템
+<img width="1004" height="467" alt="image" src="https://github.com/user-attachments/assets/4455ebe9-2e0e-4af8-b335-f52b1fb3d92c" />
+- 문서 업로드 및 관리자 승인 절차
 
 ---
 
@@ -127,6 +139,6 @@
 ## 기타 정보
 
 - 본 프로젝트는 **2025 HERE+ETHON 해커톤**을 위해 제작되었습니다.
-- 개발 기간: **2025.06 ~ 2025.07.12**
+- 개발 기간: **2025.06.27 ~ 2025.07.12**
 - 기능 개발과 기획, 디자인까지 전 팀원이 협업하여 완성한 프로젝트입니다.
 
