@@ -230,3 +230,41 @@ class ReviewDetailSerializer(serializers.ModelSerializer):
 
     def get_mentor_nickname(self, obj):
         return obj.match.mentor.nickname
+    
+#멘티용 연결 해제
+class MenteeCancelMatchingSerializer(serializers.Serializer):
+    request_id = serializers.IntegerField()
+
+    def validate(self, data):
+        try:
+            req = MatchingRequest.objects.get(id=data['request_id'])
+        except MatchingRequest.DoesNotExist:
+            raise serializers.ValidationError("매칭 요청이 존재하지 않습니다.")
+        if req.status != 'accepted':
+            raise serializers.ValidationError("진행 중인 매칭만 해제할 수 있습니다.")
+        return data
+
+    def save(self, **kwargs):
+        req = MatchingRequest.objects.get(id=self.validated_data['request_id'])
+        req.status = 'rejected'
+        req.save()
+
+#멘토용 연결 해제 (사유 포함)
+class MentorCancelMatchingSerializer(serializers.Serializer):
+    request_id = serializers.IntegerField()
+    cancel_reason = serializers.CharField(max_length=300)
+
+    def validate(self, data):
+        try:
+            req = MatchingRequest.objects.get(id=data['request_id'])
+        except MatchingRequest.DoesNotExist:
+            raise serializers.ValidationError("매칭 요청이 존재하지 않습니다.")
+        if req.status != 'accepted':
+            raise serializers.ValidationError("진행 중인 매칭만 해제할 수 있습니다.")
+        return data
+
+    def save(self, **kwargs):
+        req = MatchingRequest.objects.get(id=self.validated_data['request_id'])
+        req.status = 'rejected'
+        req.cancel_reason = self.validated_data['cancel_reason']
+        req.save()
