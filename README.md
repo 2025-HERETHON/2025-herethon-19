@@ -1,10 +1,7 @@
 # HERizon
-<img width="1920" height="1080" alt="메인 페이지 (로그인 전)" src="https://github.com/user-attachments/assets/c1e8add2-435f-4b3d-a3ff-35cfe996c9fa" />
-
-
-
 > **HER + Empowerment**  
 > **경력 단절 여성의 커리어 성장을 위한 온라인 멘토링 & 커뮤니티 플랫폼**
+<img width="1920" height="1080" alt="메인 페이지 (로그인 전)" src="https://github.com/user-attachments/assets/c1e8add2-435f-4b3d-a3ff-35cfe996c9fa" />
 
 “**HER Empowerment begins at HERizon**”  
 멈췄던 커리어, 여기서 다시 이어가세요.
