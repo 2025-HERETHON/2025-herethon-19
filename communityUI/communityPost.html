@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>커뮤니티 게시글 - Herizon</title>
+  <link rel="stylesheet" href="communityPost.css" />
+</head>
+<body data-post-id="3">
+  <!-- 헤더 -->
+  <header class="header-container">
+    <div class="left">
+      <div class="header-logo">Herizon</div>
+      <nav class="header-nav">
+        <a href="#">커뮤니티</a>
+        <a href="#">멘토 탐색</a>
+        <a href="#">멘토챗</a>
+      </nav>
+    </div>
+    <div class="header-icon">
+      <a href="#">
+        <img src="/assets/headerProfile.svg" alt="프로필 아이콘" />
+      </a>
+    </div>
+  </header>
+
+  <!-- 게시글 전체 영역 -->
+  <div class="content-wrapper">
+    <!-- 사이드바 -->
+    <div class="sidebar">
+      <img src="/assets/communityProfile.svg" alt="profile" class="profile-icon" />
+      <div class="user-info">
+        <img src="/assets/leafIcon.svg" alt="leaf" class="leaf-icon" />
+        <div class="username">김멘티</div>
+      </div>
+      <div class="point">190잎</div>
+      <div class="tag-wrapper">
+        <div class="tag-list">
+          <span class="tag">프론트엔드 개발</span>
+          <span class="tag">웹 개발</span>
+          <span class="tag">워킹맘</span>
+          <span class="tag">시간 관리</span>
+        </div>
+      </div>
+      <button class="sidebar-btn">프로필 사진 변경</button>
+      <button class="sidebar-btn logout">로그아웃</button>
+    </div>
+
+    <!-- 게시글 상세 -->
+    <div class="post-detail">
+      <!-- 상단: 제목 + 태그 + 작성자 정보 -->
+      <div class="post-header">
+        <div class="post-title">프론트엔드 스터디 모집</div>
+        <div class="bottom-row">
+          <div class="bottom-left">
+            <div class="tag-list-post">
+              <span class="tag-post">프론트엔드 개발</span>
+              <span class="tag-post">워킹맘</span>
+              <span class="tag-post">스터디</span>
+            </div>
+          </div>
+          <div class="bottom-right">
+            <div class="post-meta">
+              <img src="/assets/commentProfile.svg" alt="profile" class="meta-icon" />
+              <span class="meta-author">김멘티</span>
+              <span class="divider">|</span>
+              <span class="meta-date">2025.06.29</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 본문 -->
+      <div class="post-content">
+        <p>
+          안녕하세요~ 처음으로 게시글 올려봅니다 ^^<br />
+          아이가 이제 초등학교에 들어가서 재취업하려고 합니다.<br />
+          한빛미디어 교재로 프론트엔드 기초부터 다져보려고 하는데, 같이 공부할 워킹맘 있나요~?<br />
+          교재는 미리 생각해놨고 구글미트나 줌으로 화상 스터디해요!
+        </p>
+      </div>
+
+      <!-- 좋아요/댓글 수 -->
+      <div class="reaction-bar">
+        <div class="reaction-item">
+          <img src="/assets/heartNone.svg" class="icon heart-icon" alt="heart" />
+          <span class="like-count">5</span>
+        </div>
+        <div class="reaction-item">
+          <img src="/assets/commentIcon.svg" class="icon comment-icon" alt="comment" />
+          <span class="comment-count">0</span>
+        </div>
+      </div>
+
+      <!-- 댓글 영역 -->
+      <div class="comment-section">
+        <!-- 동적으로 생성될 댓글 리스트 -->
+        <div class="dynamic-comments"></div>
+
+        <!-- 댓글 입력창 -->
+        <div class="comment-input-wrapper">
+          <div class="comment-input-box">
+            <img src="/assets/commentProfile.svg" class="comment-Profile-icon" alt="profile" />
+            <span class="comment-author">김멘티</span>
+            <input type="text" placeholder="댓글을 남겨주세요" class="comment-input" />
+            <button class="send-btn">
+              <img src="/assets/sendIcon.svg" alt="send" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 푸터 -->
+  <footer class="footer-container">
+    <div class="footer-logo">Herizon</div>
+    <div>
+      <div class="footer-info">
+        (주) 허라이즌 | 서울시 멋사구 멋사로, 19층 | 대표 : 김소망, 김윤서, 김은지, 손예원, 최윤영 | 사업자 등록번호 : 019-019-019<br />
+        통신판매업신고번호 제 2025-서울멋사-1919호<br />
+        직업정보제공사업신고 멋사청 2025-19호
+      </div>
+      <div class="footer-copyright">
+        Copyright by (주) 허라이즌, All right reserved
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/communityPost.js"></script>
+</body>
+</html>
