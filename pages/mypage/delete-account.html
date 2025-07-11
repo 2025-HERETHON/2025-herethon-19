@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>delete-account</title>
+    <link rel="stylesheet" href="../../components/HeadFooter.css" />
+    <link rel="stylesheet" href="../css/delete-account.css" />
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header class="header-container">
+      <div class="left">
+        <div class="header-logo">Herizon</div>
+        <nav class="header-nav">
+          <a href="#">커뮤니티</a>
+          <a href="#">멘토 탐색</a>
+          <a href="#">멘토챗</a>
+        </nav>
+      </div>
+
+      <div class="right">
+        <div class="header-icon">
+          <a href="../pages/my-mentee.html">
+            <img src="../../components/img/iconoir_profile-circle.svg" alt="프로필 아이콘" />
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 본문 (공백 영역) -->
+    <main class="main-placeholder">
+      <div class="container">
+        <!-- 왼쪽 -->
+        <aside class="my-info-cnt">
+          <img class="profile-img" src="../img/profile.svg" />
+
+          <div class="info">
+            <div class="LvAndName">
+              <img class="lv-icon" src="../img/menteeLv.svg" />
+              <span>김멘티</span>
+            </div>
+            <p class="leaf-count">190잎</p>
+          </div>
+
+          <div class="tag-list">
+            <span class="tag">프론트엔드 개발</span>
+            <span class="tag">웹 개발</span>
+            <span class="tag">워킹맘</span>
+            <span class="tag">시간 관리</span>
+          </div>
+
+          <!-- 버튼 묶음 -->
+          <div class="btn-wrapper">
+            <button class="profile-btn">프로필 사진 변경</button>
+            <button class="logout-btn">로그아웃</button>
+          </div>
+        </aside>
+
+        <!-- 오른쪽 -->
+        <!-- 오른쪽 -->
+<div class="right-aside-cnt">
+    <h2 class="section-title">계정 &gt; 회원 탈퇴</h2>
+  
+    <div class="withdraw-box">
+      <p class="withdraw-text">
+        <strong>HERizon을 탈퇴하면,</strong><br><br>
+        내 프로필, 게시글, 그 외 설정한 모든 정보가 사라지고 복구가 불가능합니다.<br>
+        참여 중인 멘토 멘티 활동 및 매칭이 취소됩니다.<br>
+        멘토링 사례에 등록된 멘토링 내용은 삭제되지 않습니다.
+      </p>
+  
+      <label class="withdraw-check">
+        <input type="checkbox" id="withdraw-confirm" />
+        <span class="custom-checkbox"></span>
+        <span>위 유의사항을 모두 확인하였고, 탈퇴를 진행합니다.</span>
+      </label>
+  
+      <button id="withdraw-btn" disabled>HERizon 탈퇴</button>
+    </div>
+  </div>
+  
+          
+    </main>
+
+    <footer class="footer-container">
+      <div class="footer-logo">Herizon</div>
+      <div>
+        <div class="footer-info">
+          (주) 허라이즌 | 서울시 멋사구 멋사로, 19층 | 대표 : 김소망, 김윤서, 김은지, 손예원, 최윤영 | 사업자 등록번호 : 019-019-019<br />
+          통신판매업신고번호 제 2025-서울멋사-1919호<br />
+          직업정보제공사업신고 멋사청 2025-19호
+        </div>
+        <div class="footer-copyright">Copyright by (주) 허라이즌, All right reserved</div>
+      </div>
+    </footer>
+    <script src="../js/delete-account.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>회원가입 멘토 인증 - Herizon</title>
+        <link rel="stylesheet" href="joinStep4Mento.css">
+    </head>
+<body>
+
+    <!-- 헤더 -->
+<header class="header-container">
+    <div class="left">
+    <div class="header-logo">Herizon</div>
+    <nav class="header-nav">
+        <a href="#">커뮤니티</a>
+        <a href="#">멘토 탐색</a>
+        <a href="#">멘토챗</a>
+    </nav>
+    </div>
+    <div class="header-icon">
+        <a href="#">
+            <img src="/assets/headerProfile.svg" alt="프로필 아이콘" />
+        </a>
+    </div>
+</header>
+
+<!-- 멘토 인증 -->
+
+<main class="mento-certification-box">
+    <h2 class="meto-title">멘토 활동을 위해 추가 정보를 입력해주세요.</h2>
+
+    <div class="mento-upload">
+        <p class="mento-upload-text">
+            경력 / 자격증 등 증빙 자료를 업로드해주세요.<br />
+            <span class="mento-upload-note">(인증을 완료하지 않으면 멘토 활동이 불가능합니다.)</span>
+        </p>
+        <button id="uploadBtn" class="mento-upload-btn">업로드하기</button>
+    </div>
+
+    <!-- 업로드 파일 리스트 -->
+    <div class="file-list" id="fileList"></div>
+
+    <label for="mentoIntro" class="mento-label">자기소개를 간단히 작성해주세요. (선택)</label>
+    <textarea id="mentoIntro" class="mento-textarea" placeholder="경력, 멘토링 계기, 멘티에게 하고 싶은 말 등" maxlength="500"></textarea>
+    <div class="text-count">0/500</div>
+
+    <button class="certify-btn">멘토 인증</button>
+
+    <div class="skip-section">
+        <p class="skip-title">건너뛰기</p>
+        <p class="skip-desc">
+            건너뛰기를 선택하면 나중에 마이페이지에서 멘토 인증을 완료할 수 있습니다.<br/>
+            단, 인증 전까지는 멘토 활동이 제한됩니다.
+        </p>   
+     </div>
+</main>
+
+<!-- 업로드 팝업 -->
+<div id="uploadModal" class="upload-modal">
+    <div class="upload-modal-content" id="uploadBox">
+        <span id="closeUpload" class="close">&times;</span>
+        <h2>파일 불러오기</h2>
+        <p class="desc">파일당 50MB까지 첨부 가능합니다.</p>
+        <label for="fileInput" class="upload-file-btn">
+            <img src="/assets/file.svg" alt="file icon"/>
+            <span>파일 추가</span>
+        </label>
+        <input type="file" id="fileInput" style="display: none;"/>
+        <p class="sub-desc">또는 이곳에 파일을 끌어 놓으세요.</p>
+    </div>
+</div>
+
+
+
+
+  <!-- 푸터 -->
+<footer class="footer-container">
+    <div class="footer-logo">Herizon</div>
+    <div>
+    <div class="footer-info">
+        (주) 허라이즌 | 서울시 멋사구 멋사로, 19층 | 대표 : 김소망, 김윤서, 김은지, 손예원, 최윤영 | 사업자 등록번호 : 019-019-019<br>
+        통신판매업신고번호 제 2025-서울멋사-1919호<br>
+        직업정보제공사업신고 멋사청 2025-19호
+    </div>
+   <div class="footer-copyright">
+        Copyright by (주) 허라이즌, All right reserved
+   </div>
+    </div>
+</footer>
+<!-- 경로 -->
+<script src="/js/joinJS/joinStep4Mento.js"></script>
+</body>
+</html>
