@@ -105,46 +105,105 @@
   padding: 62px;
 }
 
-.mymentor {
-  width: 100%;
-  display: block;
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.card-box {
+  padding: 101px 67px 101px 40px;
+  align-items: center;
   border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.26);
-  background: #eefaf8;
-  padding: 25px;
-  p {
-    margin: 10px;
-  }
+  background: #fff;
+  box-shadow: 5px 5px 5px 10px rgba(0, 0, 0, 0.25);
 }
-.mentors-cnt {
+.mentor-line {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
 }
 
-.mentors-box {
+.mentor-left {
   display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
-.mentor-pro {
-  text-align: center;
-
-  img {
-    margin-bottom: 10px;
-  }
+.mentor-img {
+  width: 100px;
+  height: 100px;
 }
 
-.list-cnt {
-  margin: 36px;
-  border-bottom: 1px solid #ccc;
+.mentor-text p {
+  margin: 30px;
+  font-size: 18px;
+  font-weight: 400;
 }
 
-.strong {
-  display: block;
-  margin: 16px 0;
-  text-decoration: none;
-  color: #000;
+.mentor-name {
+  display: flex;
+  font-weight: bold;
+  font-size: 16px;
+  margin: auto 0;
+  justify-content: center;
 }
 
-.strong a {
+.icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.mentor-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.mentor-status .label {
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  justify-content: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.badge.ing {
+  background: #94e1dd;
+}
+
+.badge.wait {
+  background: #ccc;
+}
+
+.badge.end {
+  background: #93baf4;
+}
+
+.mentor-actions {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+}
+
+.review-link {
+  color: #666;
+  cursor: pointer;
+}
+
+.disconnect {
+  color: #ff5f5f;
+  font-weight: 500;
   cursor: pointer;
 }

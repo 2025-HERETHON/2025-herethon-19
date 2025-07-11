@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../components/HeadFooter.css" />
     <link rel="stylesheet" href="./css/my-mentee.css" />
   </head>
+
   <body>
     <!-- 헤더 -->
     <header class="header-container">
@@ -30,7 +31,31 @@
     <!-- 본문 (공백 영역) -->
     <main class="main-placeholder">
       <div class="container">
-        <aside class="my-info-cnt"></aside>
+        <aside class="my-info-cnt">
+          <img class="profile-img" src="img/profile.svg" />
+
+          <div class="info">
+            <div class="LvAndName">
+              <img class="lv-icon" src="img/menteeLv.svg" />
+              <span>김멘티</span>
+            </div>
+            <p class="leaf-count">190잎</p>
+          </div>
+
+          <div class="tag-list">
+            <span class="tag">프론트엔드 개발</span>
+            <span class="tag">웹 개발</span>
+            <span class="tag">워킹맘</span>
+            <span class="tag">시간 관리</span>
+          </div>
+
+          <!-- 버튼 묶음 -->
+          <div class="btn-wrapper">
+            <button class="profile-btn">프로필 사진 변경</button>
+            <button class="logout-btn">로그아웃</button>
+          </div>
+        </aside>
+
         <div class="right-aside-cnt">
           <div class="mymentor">
             <p>나의 멘토</p>
@@ -59,21 +84,21 @@
           <!-- list -->
           <div class="list-cnt">
             <strong class="strong">멘토링 활동</strong>
-            <p>멘토 설정</p>
-            <p>멘토 인증</p>
+            <a href="./mypage/mentor-setting.html" class="strong">멘토 설정</a>
+            <a href="./mypage/mentor-certify.html" class="strong">멘토 인증</a>
           </div>
           <div class="list-cnt">
             <strong class="strong">커뮤니티</strong>
-            <p>내가 쓴 글</p>
-            <p>내가 쓴 댓글</p>
-            <p>좋아요 누른 글</p>
+            <a href="./mypage/my-posts.html" class="strong">내가 쓴 글</a>
+            <a href="./mypage/my-comments.html" class="strong">내가 쓴 댓글</a>
+            <a href="./mypage/my-likes.html" class="strong">좋아요 누른 글</a>
           </div>
           <div class="list-cnt">
             <strong class="strong">계정</strong>
-            <p>회원정보 수정</p>
-            <p>관심사 수정</p>
-            <p>포인트 내역</p>
-            <p>회원 탈퇴</p>
+            <a href="./mypage/edit-profile.html" class="strong">회원정보 수정</a>
+            <a href="./mypage/edit-interest.html" class="strong">관심사 수정</a>
+            <a href="./mypage/point-history.html" class="strong">포인트 내역</a>
+            <a href="./mypage/delete-account.html" class="strong">회원 탈퇴</a>
           </div>
         </div>
       </div>

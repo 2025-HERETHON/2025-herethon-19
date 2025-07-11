@@ -104,47 +104,73 @@
   width: 776px;
   padding: 62px;
 }
-
-.mymentor {
-  width: 100%;
-  display: block;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.26);
-  background: #eefaf8;
-  padding: 25px;
-  p {
-    margin: 10px;
-  }
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 40px;
 }
-.mentors-cnt {
+
+.withdraw-box {
+  background-color: #fff;
+  border-radius: 14px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  margin-top: 30px;
+}
+
+.withdraw-text {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.withdraw-check {
   display: flex;
-  justify-content: space-around;
-}
-
-.mentors-box {
-  display: flex;
-}
-
-.mentor-pro {
-  text-align: center;
-
-  img {
-    margin-bottom: 10px;
-  }
-}
-
-.list-cnt {
-  margin: 36px;
-  border-bottom: 1px solid #ccc;
-}
-
-.strong {
-  display: block;
-  margin: 16px 0;
-  text-decoration: none;
-  color: #000;
-}
-
-.strong a {
+  align-items: center;
+  font-size: 15px;
+  margin-bottom: 30px;
   cursor: pointer;
+}
+
+.withdraw-check input {
+  display: none;
+}
+
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #666;
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+}
+
+.withdraw-check input:checked + .custom-checkbox::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: #007aff;
+  border-radius: 50%;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
+#withdraw-btn {
+  width: 100%;
+  background-color: #007aff;
+  color: white;
+  font-size: 16px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#withdraw-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }

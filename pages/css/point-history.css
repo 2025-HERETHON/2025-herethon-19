@@ -100,51 +100,107 @@
 
 /* 오른쪽 */
 .right-aside-cnt {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 700px;
   width: 776px;
   padding: 62px;
 }
 
-.mymentor {
-  width: 100%;
-  display: block;
+#post-container {
+  flex-grow: 1; /* 카드 영역은 유동적으로 늘어남 */
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.point-total {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.point-value {
+  color: #2979ff;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.point-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f3f3f3;
+  padding: 16px;
   border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.26);
-  background: #eefaf8;
-  padding: 25px;
-  p {
-    margin: 10px;
-  }
-}
-.mentors-cnt {
-  display: flex;
-  justify-content: space-around;
+  margin-bottom: 16px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.mentors-box {
+.point-left {
   display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.mentor-pro {
+.point-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.point-action {
+  font-weight: bold;
+}
+
+.point-change {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.point-change.plus {
+  color: #009688;
+}
+
+.point-change.minus {
+  color: #e53935;
+}
+
+.point-date {
+  font-size: 14px;
+  color: #333;
+}
+
+.pagination {
   text-align: center;
-
-  img {
-    margin-bottom: 10px;
-  }
+  margin-top: 30px;
+  position: sticky;
+  bottom: 20px;
+  background: white;
+  padding: 10px;
 }
 
-.list-cnt {
-  margin: 36px;
-  border-bottom: 1px solid #ccc;
-}
-
-.strong {
-  display: block;
-  margin: 16px 0;
-  text-decoration: none;
-  color: #000;
-}
-
-.strong a {
+.page-btn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: none;
+  border-radius: 16px;
+  font-size: 18px;
+  margin: 0 10px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.page-btn.active {
+  background-color: #d9d9d9;
+  font-weight: bold;
+}
+
+.point-box {
+  display: flex;
+  gap: 30px;
 }
