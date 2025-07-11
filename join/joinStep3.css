@@ -1,0 +1,246 @@
+body {
+    margin: 0;
+    width: 100%; /*수정*/
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: white;
+}
+
+/* 헤더 */
+.header-container {
+    width: 100%;/*수정*/
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    display: flex;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.left {
+  display: flex;
+}
+
+.header-logo {
+    font-size: 30px;
+    font-weight: 700;
+    color: black;
+    transition: 0.3s ease;
+    padding: 20px 120px;
+    transform: translateY(12px);
+    cursor: pointer;
+}
+
+/* hover 시 이미지 변경 */
+.header-icon:hover {
+  content: url("/assets/headerProfile_hover.svg");
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 76px;
+    transform: translateY(15px);
+}
+
+.header-nav a {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: black;
+  text-decoration: none;
+  padding-bottom: 4px;
+  transition: all 0.2s ease;
+}
+
+.header-nav a:hover {
+  color: #357FE8;
+}
+
+.header-icon {
+  padding: 5px 120px;
+  transform: translateY(15px);
+}
+
+/* 약관 동의 */
+
+* {
+    box-sizing: border-box;
+}
+
+.term-box {
+  width: 1007px;
+  margin: 76px auto 76px auto; /* 가운데 정렬 및 상하 여백 */
+  padding: 50px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.role-title {
+  font-size: 30px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 40px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.terms-box {
+  width: 500px;
+  margin: 40px auto 0 auto;
+  padding: 24px;
+  border-radius: 10px;
+  background-color: white;
+  font-family: 'Pretendard', sans-serif;
+  position: relative;
+  top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 여기서 왼쪽 정렬 */
+}
+
+.terms-all {
+  display: flex;
+  margin: auto;
+  margin-left: 69px;
+}
+
+.check-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.terms-all-label {
+  font-size: 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  color: black;
+}
+
+.terms-divider {
+  width: 300px;
+  border: none;
+  height: 2px;
+  background-color: #e4e4e4;
+  margin: 15px auto;
+  margin-left: 69px;
+}
+
+.terms-list {
+  list-style: none;
+  padding: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.terms-list li {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: black;
+}
+
+.check-icon {
+  margin-right: 12px;
+}
+
+.view-link {
+  color: #b3b3b3;
+  font-size: 16px;
+  margin-left: 16px;
+  transition: all 0.2s ease;
+}
+
+.view-link:hover {
+  color: #357FE8;
+}
+
+.next-button {
+  width: 306px;  /* 여기! form-group 기준으로 딱 맞춤 */
+  height: 48px;
+  padding: 12px 0;
+  position: relative;
+  top: 30px;
+  margin: 76px auto;  /* 위 여백 필요하면 따로 조정 */
+  display: block;  /* block 요소여야 margin auto가 동작함 */
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #357fe8;
+  color: #fffafa;
+}
+
+.next-button:hover {
+  background-color: #2e69c6;
+  transition: background-color 0.3s ease;
+}
+
+/* 약관 팝업 */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* 푸터 */
+
+.footer-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 80px;
+  padding: 25px 120px;
+  background: white;
+  box-shadow: 0 -3px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 80px;
+}
+
+.footer-logo {
+  font-size: 30px;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.footer-info {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.footer-copyright {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.7);
+}
