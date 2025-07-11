@@ -127,7 +127,7 @@
       </a><br/>
       손예원<br/>
       프론트엔드<br/>
-      <small>회원가입/로그인, 커뮤니티 메인, 커뮤니티 게시글 작성, 커뮤니티 게시글 상세, 멘토 찾기, 멘토 상세</small>
+      <small>회원가입/로그인, 커뮤니티, 멘토 찾기, 멘토 상세</small>
     </td>
     <td align="center">
       <a href="https://github.com/rladmswl1116">
