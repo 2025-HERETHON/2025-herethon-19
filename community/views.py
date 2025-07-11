@@ -14,6 +14,7 @@ from rest_framework.decorators import api_view, permission_classes
 from point.models import PointHistory
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.exceptions import NotFound
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class PostListView(generics.ListAPIView):
     queryset = Post.objects.all().order_by('-created_at')
@@ -22,6 +23,8 @@ class PostListView(generics.ListAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'content']
 
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 class PostCreateAPIView(APIView):
     permission_classes = [IsAuthenticated]
 

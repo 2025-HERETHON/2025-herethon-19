@@ -1,3 +1,10 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("accessToken");
+  if (!token) {
+    alert("로그인이 필요합니다.");
+    window.location.href = "/logIn/logIn.html";
+  }
+});
 const heartIcon = document.getElementById('heartIcon');
 const likeCount = document.getElementById('likeCount');
 
@@ -69,6 +76,13 @@ async function loadCommunityPosts(page = 1, search = "") {
   } catch (err) {
     console.error("에러 발생:", err.message);
   }
+  console.log("📌 사용 중인 accessToken:", token);
+  console.log("📨 요청 URL:", url.toString());
+  console.log("📤 fetch 요청 헤더:", {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`
+  });
+
 }
 
 function renderPosts(posts) {
