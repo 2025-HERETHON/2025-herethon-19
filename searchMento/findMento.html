@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>멘토 탐색 - Herizon</title>
+        <link rel="stylesheet" href="findMento.css">
+    </head>
+<body>
+
+    <!-- 헤더 -->
+<header class="header-container">
+    <div class="left">
+    <div class="header-logo">Herizon</div>
+    <nav class="header-nav">
+        <a href="#">커뮤니티</a>
+        <a href="#">멘토 탐색</a>
+        <a href="#">멘토챗</a>
+    </nav>
+    </div>
+    <div class="header-icon">
+        <a href="#">
+            <img src="/assets/headerProfile.svg" alt="프로필 아이콘" />
+        </a>
+    </div>
+</header>
+
+<!-- 사이드 바 -->
+
+<div class="content-wrapper">
+<div class="sidebar">
+  <img src="/assets/communityProfile.svg" alt="profile" class="profile-icon">
+  <div class="user-info">
+  <img src="/assets/leafIcon.svg" alt="leaf" class="leaf-icon">
+  <div class="username">김멘티</div>
+  </div>
+  <div class="point">190잎</div>
+  <div class="tag-wrapper">
+  <div class="tag-list">
+    <span class="tag">프론트엔드 개발</span>
+    <span class="tag">웹 개발</span>
+    <span class="tag">워킹맘</span>
+    <span class="tag">시간 관리</span>
+  </div>
+  </div>
+
+  <button class="sidebar-btn">프로필 사진 변경</button>
+  <button class="sidebar-btn logout">로그아웃</button>
+</div>
+
+<!-- 멘토 카드 리스트 -->
+<div class="mento-list-wrapper">
+    <div class="mento-list" id="mentoList">
+        <!-- 멘토 카드 반복 -->
+         <div class="mento-card">
+            <div class="mento-profile">
+                <div class="mento-image">
+                <img src="/assets/mentoProfile.svg" alt="profile" class="mento-profile-icon"/>
+                </div>
+                <div class="mento-name">김멘토</div>
+            </div>
+            <div class="mento-tags">
+                <span class="tag1">프론트엔드 개발</span>
+                <span class="tag1">웹 개발</span>
+                <span class="tag1">워킹맘</span>
+                <span class="tag1">시간관리</span>
+            </div>
+            <div class="mento-footer">
+                <div class="like">
+                <img src="/assets/heartNone.svg" alt="좋아요" class="heart-icon" data-liked="false">
+                <span>190</span>
+                </div>
+                <button class="more-btn">더보기</button>
+            </div>
+            </div>
+    </div>
+
+    <!-- 페이지네이션 -->
+
+    <div class="pagination">
+        <span class="page active">1</span>
+        <span class="page">2</span>
+        <span class="page">3</span>
+    </div>
+
+</div>
+</div>
+
+
+
+  <!-- 푸터 -->
+<footer class="footer-container">
+    <div class="footer-logo">Herizon</div>
+    <div>
+    <div class="footer-info">
+        (주) 허라이즌 | 서울시 멋사구 멋사로, 19층 | 대표 : 김소망, 김윤서, 김은지, 손예원, 최윤영 | 사업자 등록번호 : 019-019-019<br>
+        통신판매업신고번호 제 2025-서울멋사-1919호<br>
+        직업정보제공사업신고 멋사청 2025-19호
+    </div>
+   <div class="footer-copyright">
+        Copyright by (주) 허라이즌, All right reserved
+   </div>
+    </div>
+</footer>
+
+<script src="/js/findMento.js" defer></script>
+
+</body>
+</html>

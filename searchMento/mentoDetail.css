@@ -1,0 +1,528 @@
+body {
+    margin: 0;
+    width: 100%; /*수정*/
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: white;
+}
+
+/* 헤더 */
+.header-container {
+    width: 100%;/*수정*/
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    display: flex;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.left {
+  display: flex;
+}
+
+.header-logo {
+    font-size: 30px;
+    font-weight: 700;
+    color: black;
+    transition: 0.3s ease;
+    padding: 20px 120px;
+    transform: translateY(12px);
+    cursor: pointer;
+}
+
+/* hover 시 이미지 변경 */
+.header-icon:hover {
+  content: url("/assets/headerProfile_hover.svg");
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 76px;
+    transform: translateY(15px);
+}
+
+.header-nav a {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: black;
+  text-decoration: none;
+  padding-bottom: 4px;
+  transition: all 0.2s ease;
+}
+
+.header-nav a:hover {
+  color: #357FE8;
+}
+
+.header-icon {
+  padding: 5px 120px;
+  transform: translateY(15px);
+}
+
+/* 멘토 상세 페이지 */
+* {
+    box-sizing: border-box;
+}
+
+.content-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 106px;
+  width: 1200px;
+  margin: 60px auto;
+}
+
+.mento-detail {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+}
+
+.mento-detail-top {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.mento-profile-icon {
+  width: 70px;
+  height: 70px;
+}
+
+.mento-info {
+  flex: 1;
+}
+
+.mento-name {
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.heart-icon {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  margin-top: -6px;
+}
+
+.like-count {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.mento-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag1 {
+  background-color: rgba(123, 108, 246, 0.5);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+.apply-btn {
+  background-color: #357FE8;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 100px;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+
+.apply-btn:hover {
+  background-color: #2e69c6;
+  transition: background-color 0.3s ease;
+}
+
+.about-section{
+  margin-bottom: 48px;
+  margin-top: 60px;
+}
+
+.career-section,
+.post-section {
+  margin-bottom: 48px;
+}
+
+.about-section h3,
+.career-section h3,
+.review-section h3,
+.post-section h3 {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.about-section p,
+.career-section ul p,
+.post-section p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.career-section ul,
+.post-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.career-section li,
+.post-section li {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+/* 리뷰 카드 */
+.review-section {
+  margin-bottom: 48px;
+}
+
+.review-card {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.25);
+  padding: 24px;
+  position: relative;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.review-header h3 {
+  margin: 0;               /* 기본 여백 제거 */
+  line-height: 1;          /* 수직 정렬 맞추기 */
+  font-size: 25px;         /* 원하시면 폰트 사이즈 지정 */
+  display: flex;           /* inline-block 또는 flex도 가능 */
+  align-items: center;     /* 혹시 폰트 베이스라인 문제 있을 때 보정 */
+}
+
+.stars img {
+  width: 30px;
+  height: 30px;
+}
+
+/* 리뷰 항목 */
+.review-item {
+  background: rgba(255,255,255,0.77);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+
+.review-text {
+  font-size: 16px;
+  line-height: 1.4;
+  color: #000;
+}
+
+.review-text .point {
+  color: #357FE8;
+  font-weight: 500;
+}
+
+.review-btn {
+  background-color: #357FE8;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 10px;
+  box-shadow: 0px 3px 3px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+
+.review-btn:hover {
+  background-color: #2e69c6;
+  transition: background-color 0.3s ease;
+}
+
+/* 사이드 바 */
+
+.sidebar {
+  width: 272px;
+  height: 738px;
+  background-color: rgba(78, 198, 183, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
+  padding: 40px 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+}
+
+.profile-icon {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+}
+
+.user-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; /* 간격 조절 */
+  justify-content: center;
+}
+
+.username {
+  font-size: 20px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.leaf-icon {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.point {
+  font-size: 16px;
+  font-weight: 500;
+  transform: translateY(-5px);
+}
+
+.tag-list {
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  transform: translateX(7px);
+}
+
+.tag {
+  padding: 6px 12px;
+  border-radius: 100px;
+  background-color: rgba(78, 198, 183, 0.5);
+  border: 1px solid #4EC6B7;
+  font-size: 14px;
+}
+
+.sidebar-btn {
+  width: 194px;
+  height: 40px;
+  background-color: #357FE8;
+  color: white;
+  border: none;
+  border-radius: 100px;
+  padding: 10px;
+  margin-top: 250px;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.sidebar-btn:hover {
+  background-color: #2e69c6;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-btn.logout {
+  margin-top: 10px;
+}
+
+
+
+/* 푸터 */
+
+.footer-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 80px;
+  padding: 25px 120px;
+  background: white;
+  box-shadow: 0 -3px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 80px;
+}
+
+.footer-logo {
+  font-size: 30px;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.footer-info {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.footer-copyright {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* 모달 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none; /* 기본은 숨김 */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  width: 500px;
+  position: relative;
+  text-align: center;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+.modal-content.large {
+  width: 640px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.close-btn::before,
+.close-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 2px;
+  background-color: black;
+  transform-origin: center;
+}
+
+.close-btn::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close-btn::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.modal-title {
+  font-size: 20px;
+  font-family: 'Noto Sans KR';
+  font-weight: 500;
+  color: black;
+  margin-bottom: 12px;
+}
+
+#reviewPopupModal .modal-title {
+  text-align: left;
+}
+
+.modal-sub {
+  font-size: 18px;
+  font-family: 'Noto Sans KR';
+  font-weight: 500;
+  color: rgba(0,0,0,0.5);
+  margin-bottom: 40px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.cancel-btn,
+.apply-btn-modal {
+  padding: 11px 36px;
+  font-size: 18px;
+  font-family: 'Noto Sans KR';
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 3px 3px 3px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: white;
+  color: #357FE8;
+}
+
+.apply-btn-modal {
+  background: #357FE8;
+  color: white;
+}
+
+.cancel-btn:hover {
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.25);
+}
+.apply-btn-modal:hover {
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.stars-review {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.stars-review span {
+  margin: 10px 0;
+  margin-left: 10px;
+  margin-top: 14px;
+}
+
+.review-box {
+  background: #fff;
+  border: 2px solid #e4e4e4;
+  padding: 20px;
+  text-align: left;
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 1.6;
+}
