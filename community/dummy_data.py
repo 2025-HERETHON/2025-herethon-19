@@ -6,7 +6,7 @@ User = get_user_model()
 def create_test_user():
     email = "dbstj2314589@naver.com"  # 통일된 이메일
     if not User.objects.filter(email=email).exists():
-        User.objects.create_user(email=email, password="Test1234!!")
+        User.objects.create_user(email=email, password="Test1234!!",password="Test1234!!",nickname ="김멘티",user_type="mentee",interests=["백엔드 개발", "데이터 분석", "마케팅"], point=50 )
         print("테스트 계정 생성 완료.")
     else:
         print("이미 존재하는 테스트 계정입니다.")
