@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>회원가입 정보입력 - Herizon</title>
+        <link rel="stylesheet" href="joinStep1.css">
+    </head>
+<body>
+
+    <!-- 헤더 -->
+<header class="header-container">
+    <div class="left">
+    <div class="header-logo">Herizon</div>
+    <nav class="header-nav">
+        <a href="#">커뮤니티</a>
+        <a href="#">멘토 탐색</a>
+        <a href="#">멘토챗</a>
+    </nav>
+    </div>
+    <div class="header-icon">
+        <a href="#">
+            <img src="/assets/headerProfile.svg" alt="프로필 아이콘" />
+        </a>
+    </div>
+</header>
+
+<!-- 로그인 폼 -->
+  <div class="join-box">
+  <div class="form-group">
+    <label for="email" class="login-label">이메일</label>
+    <input type="email" id="email" class="login-input" placeholder="2025@herethon.ac.kr"/>
+  </div>
+
+  <div class="form-group">
+    <label for="password" class="login-label">비밀번호</label>
+    <input type="password" id="password" class="login-input" placeholder="영문, 숫자, 특수문자가 모드 들어간 8자 이상"/>
+    <input type="password" id="confirm-password" class="login-input password-second" placeholder="비밀번호를 한 번 더 입력해주세요."/>
+  </div>
+
+  <div class="form-group">
+    <label for="nickname" class="login-label">닉네임</label>
+    <input type="nickname" id="nickname" class="login-input" placeholder="김멘티멘토"/>
+  </div>
+
+  <div class="form-group">
+    <label for="phone" class="login-label">휴대폰 번호</label>
+      <div class="phone-field-wrapper">
+        <span class="country-code">+82</span>
+        <input type="text" class="phone-field" placeholder="010 - 0000 0000">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button class="next-button">다음</button>
+  </div>
+</div>
+
+  <!-- 푸터 -->
+<footer class="footer-container">
+    <div class="footer-logo">Herizon</div>
+    <div>
+    <div class="footer-info">
+        (주) 허라이즌 | 서울시 멋사구 멋사로, 19층 | 대표 : 김소망, 김윤서, 김은지, 손예원, 최윤영 | 사업자 등록번호 : 019-019-019<br>
+        통신판매업신고번호 제 2025-서울멋사-1919호<br>
+        직업정보제공사업신고 멋사청 2025-19호
+    </div>
+   <div class="footer-copyright">
+        Copyright by (주) 허라이즌, All right reserved
+   </div>
+    </div>
+</footer>
+
+<script src="/js/joinStep1.js" defer></script>
+
+</body>
+</html>
