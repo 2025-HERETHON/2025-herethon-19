@@ -23,6 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/accounts/', include('accounts.urls')),
     path('api/profiles/', include('profiles.urls')),
+    path('api/community/', include('community.urls')), 
+    path('api/mypage/', include('mypage.urls')),
+    path('api/matching/', include('matching.urls')),
+    path('api/point/', include('point.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

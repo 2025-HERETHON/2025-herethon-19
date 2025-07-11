@@ -1,14 +1,18 @@
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import InterestSelectionSerializer, AgreementSerializer, MentorVerificationSerializer
+from .serializers import InterestSelectionSerializer, AgreementSerializer, MentorVerificationSerializer, MyInterestCombinedSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import api_view
-from .models import MentorVerification
+from .models import MentorVerification, Interest
 from django.contrib.auth import get_user_model
+from .serializers import InterestSerializer, MentorVerificationUpdateSerializer
 # Create your views here.
-#관심사
+
+User = get_user_model()
+
+#관심사 선택
 class InterestSelectionView(APIView):
     permission_classes = [AllowAny]
 
@@ -18,6 +22,32 @@ class InterestSelectionView(APIView):
             serializer.save()
             return Response({"message": "관심사가 저장되었습니다."}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class InterestListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        interests = Interest.objects.all()
+        serializer = InterestSerializer(interests, many=True)
+        return Response(serializer.data)
+
+#괸심사조회수정
+class MyInterestView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        profile = request.user.profile
+        serializer = MyInterestCombinedSerializer(profile)
+        return Response(serializer.data)
+
+    def patch(self, request):
+        profile = request.user.profile
+        serializer = MyInterestCombinedSerializer(profile, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': '관심사가 수정되었습니다.'})
+        return Response(serializer.errors, status=400)
+
 
 #약관동의
 class AgreementView(APIView):
@@ -41,7 +71,35 @@ class MentorVerificationView(APIView):
             serializer.save()
             return Response({"message": "멘토 인증이 완료되었습니다."}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+#멘토링 인증 API(회원가입 때 멘토 인증 건너뛰기 한 멘토만)
+class MentorVerificationUpdateView(APIView):
+    parser_classes = [MultiPartParser, FormParser]  
+
+    def patch(self, request):
+        email = request.data.get('email')
+        if not email:
+            return Response({'error': '이메일이 필요합니다.'}, status=400)
+
+        try:
+            user = User.objects.get(email=email)
+            mentor_verification = MentorVerification.objects.get(user=user)
+        except User.DoesNotExist:
+            return Response({'error': '해당 이메일의 사용자가 존재하지 않습니다.'}, status=404)
+        except MentorVerification.DoesNotExist:
+            return Response({'error': '멘토 인증 데이터가 존재하지 않습니다.'}, status=404)
+
+        serializer = MentorVerificationUpdateSerializer(
+            mentor_verification,
+            data=request.data,
+            partial=True
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': '멘토 인증 정보가 수정되었습니다.'})
+        return Response(serializer.errors, status=400)
+
+
 #건너뛰기
 User = get_user_model()
 
@@ -63,13 +121,33 @@ def skip_mentor_verification(request):
     return Response({"message": "멘토 인증 건너뛰기 완료"}, status=200)
 
 #멘토 인증 관리자 승인
-
 class MentorVerificationApproveView(APIView):
     def put(self, request, user_id):
         try:
             verification = MentorVerification.objects.get(user__id=user_id)
             verification.is_verified = True
             verification.save()
+
+            #user_type을 'mentor'로 변경
+            user = verification.user
+            user.user_type = 'mentor'
+            user.save()
+
             return Response({"message": "멘토 인증이 승인되었습니다."}, status=status.HTTP_200_OK)
         except MentorVerification.DoesNotExist:
             return Response({"error": "해당 유저의 인증 정보가 없습니다."}, status=status.HTTP_404_NOT_FOUND)
+        
+#좌측 프로필 박스 정보 조회
+class MyProfileSimpleView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        profile = user.profile  
+
+        return Response({
+            "nickname": user.nickname,
+            "interests": [interest.name for interest in profile.interests.all()],
+            "point": user.point
+        })
+

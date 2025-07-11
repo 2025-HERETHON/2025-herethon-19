@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>회원가입 약관 동의 - Herizon</title>
+        <link rel="stylesheet" href="joinStep3.css">
+    </head>
+<body>
+
+    <!-- 헤더 -->
+<header class="header-container">
+    <div class="left">
+    <div class="header-logo">Herizon</div>
+    <nav class="header-nav">
+        <a href="#">커뮤니티</a>
+        <a href="#">멘토 탐색</a>
+        <a href="#">멘토챗</a>
+    </nav>
+    </div>
+    <div class="header-icon">
+        <a href="#">
+            <img src="/assets/headerProfile.svg" alt="프로필 아이콘" />
+        </a>
+    </div>
+</header>
+
+<!-- 약관 동의 -->
+  <div class="term-box">
+    <h2 class="role-title">안전하고 신뢰할 수 있는 서비스를 위해 약관에 동의해주세요.</h2>
+
+    <div class="terms-box">
+        <div class="terms-all" id="agreeAll">
+            <div class="check-circle">
+                <img src="/assets/checkOFF.svg" id="checkAllIcon" alt="checkbox"/>
+            </div>
+            <span class="terms-all-label">약관 전체 동의</span>
+        </div>
+        <hr class="terms-divider"/>
+        <ul class="terms-list">
+            <li>
+                <img src="/assets/checkX.svg" alt="check" class="check-icon"/>
+                <span>[필수] HERizon 이용약관 동의</span>
+                <span class="view-link">보기</span>
+            </li>
+            <li>
+                <img src="/assets/checkX.svg" alt="check" class="check-icon"/>
+                <span>[필수] 만 14세 이상 서비스 이용 동의</span>
+                <span class="view-link">보기</span>
+            </li>
+            <li>
+                <img src="/assets/checkX.svg" alt="check" class="check-icon"/>
+                <span>[필수] 개인정보 수집 / 이용 동의</span>
+                <span class="view-link">보기</span>
+            </li>
+            <li>
+                <img src="/assets/checkX.svg" alt="check" class="check-icon"/>
+                <span>[선택] 마케팅 정보 수신 동의</span>
+                <span class="view-link">보기</span>
+            </li>
+        </ul>
+    </div>
+
+  <div class="form-group">
+    <button class="next-button">회원 가입 완료</button>
+  </div>
+</div>
+
+<!-- 약관 팝업 -->
+<div class="modal-overlay" id="termsModal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <h3 id="modalTitle">[필수] HERizon 이용약관 동의</h3>
+    <div id="modalBody">
+      <p>여기에 약관 내용을 동적으로 넣음</p>
+    </div>
+  </div>
+</div>
+
+  <!-- 푸터 -->
+<footer class="footer-container">
+    <div class="footer-logo">Herizon</div>
+    <div>
+    <div class="footer-info">
+        (주) 허라이즌 | 서울시 멋사구 멋사로, 19층 | 대표 : 김소망, 김윤서, 김은지, 손예원, 최윤영 | 사업자 등록번호 : 019-019-019<br>
+        통신판매업신고번호 제 2025-서울멋사-1919호<br>
+        직업정보제공사업신고 멋사청 2025-19호
+    </div>
+   <div class="footer-copyright">
+        Copyright by (주) 허라이즌, All right reserved
+   </div>
+    </div>
+</footer>
+
+<script src="/js/joinStep3.js"></script>
+</body>
+</html>
