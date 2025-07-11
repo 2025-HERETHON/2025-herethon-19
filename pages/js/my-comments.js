@@ -19,20 +19,45 @@ fetch("http://localhost:8000/api/profiles/profile/me/", {
     const nicknameEl = document.querySelector(".LvAndName span");
     const pointEl = document.querySelector(".leaf-count");
     const tagListEl = document.querySelector(".tag-list");
+    const labelEl = document.querySelector(".menteeORmentor");
+    const levelIcon = document.querySelector(".lv-icon");
 
     nicknameEl.textContent = data.nickname;
     pointEl.textContent = `${data.point}잎`;
-
     tagListEl.innerHTML = "";
+
+    // 관심사 태그 추가 및 mentor일 경우 스타일 지정
     data.interests.forEach((interest) => {
       const tag = document.createElement("span");
       tag.className = "tag";
       tag.textContent = interest;
+
+      if (data.user_type === "mentor") {
+        tag.style.border = "1px solid #7B6CF6";
+        tag.style.background = "rgba(123, 108, 246, 0.50)";
+      }
+
       tagListEl.appendChild(tag);
     });
+
+    // mentor인 경우 배경색 변경
+    if (data.user_type === "mentor") {
+      const mentorBackgroundTargets = document.querySelectorAll(".my-info-cnt, .mymentor");
+      mentorBackgroundTargets.forEach((el) => {
+        el.style.background = "rgba(123, 108, 246, 0.10)";
+      });
+
+      // 텍스트 변경: 나의 멘토 → 나의 멘티
+      if (labelEl) {
+        labelEl.textContent = "나의 멘티";
+      }
+      if (levelIcon) {
+        levelIcon.setAttribute("src", "../img/mentorLv.svg");
+      }
+    }
   })
   .catch((err) => {
-    console.error("프로필 API 요청 실패:", err);
+    console.error("API 요청 실패:", err);
   });
 
 // 댓글 렌더링
