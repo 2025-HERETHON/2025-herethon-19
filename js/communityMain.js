@@ -1,37 +1,45 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const token = localStorage.getItem("accessToken");
-  if (!token) {
-    alert("로그인이 필요합니다.");
-    window.location.href = "/logIn/logIn.html";
-  }
-});
-const heartIcon = document.getElementById('heartIcon');
-const likeCount = document.getElementById('likeCount');
-
-let liked = false;
-
-heartIcon?.addEventListener('click', () => {
-  liked = !liked;
-  heartIcon.src = liked ? '/assets/heartSelect.svg' : '/assets/heartNone.svg';
-
-  let count = parseInt(likeCount.textContent);
-  likeCount.textContent = liked ? count + 1 : count - 1;
-});
-
 document.addEventListener('DOMContentLoaded', function () {
   const modal = document.querySelector('.modal-overlay');
   const closeBtn = document.querySelector('.modal-close');
 
-  const hasShownPopup = sessionStorage.getItem('hasSeenPremiumPopup');
-
-  if (!hasShownPopup) {
+  const hasShownPopup = localStorage.getItem('hasSeenPremiumPopup');
+  if (!hasShownPopup && modal) {
     modal.style.display = 'flex';
-    sessionStorage.setItem('hasSeenPremiumPopup', 'true');
+    localStorage.setItem('hasSeenPremiumPopup', 'true');
+  }
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
   }
 
-  closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
+  loadSidebarProfile();
+  loadCommunityPosts();
+
+  // 글쓰기 버튼 이벤트 추가
+  const writeBtn = document.querySelector('.write-btn');
+  if (writeBtn) {
+    writeBtn.addEventListener('click', async () => {
+      const token = localStorage.getItem("accessToken");
+      try {
+        const res = await fetch("http://localhost:8000/api/profiles/profile/me/", {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        });
+        if (!res.ok) throw new Error("유저 정보 불러오기 실패");
+        const data = await res.json();
+        if (data.is_mentor) {
+          window.location.href = "/communityUI/communityMento.html";
+        } else {
+          window.location.href = "/communityUI/communityMentee.html";
+        }
+      } catch (err) {
+        alert("사용자 정보를 불러오지 못했습니다.");
+      }
+    });
+  }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -45,19 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadCommunityPosts(); // 첫 로드
-});
-
 async function loadCommunityPosts(page = 1, search = "") {
   const token = localStorage.getItem("accessToken");
-
   try {
     const url = new URL(`http://localhost:8000/api/community/posts/`);
     url.searchParams.append("page", page);
-    if (search) {
-      url.searchParams.append("search", search);
-    }
+    if (search) url.searchParams.append("search", search);
 
     const response = await fetch(url.toString(), {
       method: "GET",
@@ -67,22 +68,12 @@ async function loadCommunityPosts(page = 1, search = "") {
       }
     });
 
-    if (!response.ok) {
-      throw new Error("게시글 불러오기 실패");
-    }
-
+    if (!response.ok) throw new Error("게시글 불러오기 실패");
     const data = await response.json();
     renderPosts(data.results);
   } catch (err) {
     console.error("에러 발생:", err.message);
   }
-  console.log("📌 사용 중인 accessToken:", token);
-  console.log("📨 요청 URL:", url.toString());
-  console.log("📤 fetch 요청 헤더:", {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${token}`
-  });
-
 }
 
 function renderPosts(posts) {
@@ -104,8 +95,8 @@ function renderPosts(posts) {
         <p>${post.content}</p>
       </div>
       <div class="post-meta">
-        <img src="/assets/heartNone.svg" class="heart-icon" />
-        <span>${post.like_count}</span>
+        <img src="/assets/${post.liked ? 'heartSelect' : 'heartNone'}.svg" class="heart-icon" style="cursor:pointer" />
+        <span class="like-count">${post.like_count}</span>
         <img src="/assets/commentIcon.svg" class="comment-icon" />
         <span>${post.comment_count}</span>
         <span class="divider"></span>
@@ -116,6 +107,37 @@ function renderPosts(posts) {
         </div>
       </div>
     `;
+
+    const likeIcon = postCard.querySelector(".heart-icon");
+    const likeCountSpan = postCard.querySelector(".like-count");
+
+    likeIcon.addEventListener("click", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const token = localStorage.getItem("accessToken");
+      try {
+        const res = await fetch(`http://localhost:8000/api/community/posts/${post.id}/like/`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        });
+
+        if (!res.ok) throw new Error("좋아요 요청 실패");
+        const data = await res.json();
+
+        likeIcon.setAttribute("src", data.liked
+          ? `/assets/heartSelect.svg?v=${Date.now()}`
+          : `/assets/heartNone.svg?v=${Date.now()}`);
+
+        const currentCount = parseInt(likeCountSpan.textContent);
+        likeCountSpan.textContent = data.liked ? currentCount + 1 : currentCount - 1;
+
+      } catch (err) {
+        console.error("좋아요 처리 에러:", err.message);
+      }
+    });
 
     postList.appendChild(postCard);
   });
@@ -133,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (searchBtn) {
     searchBtn.addEventListener('click', () => {
       const keyword = searchInput.value.trim();
-      loadCommunityPosts(1, keyword); // 검색 기능
+      loadCommunityPosts(1, keyword);
     });
   }
 });
@@ -144,3 +166,39 @@ document.addEventListener('click', function (e) {
     window.location.href = `/communityUI/communityPost.html?id=${postId}`;
   }
 });
+
+async function loadSidebarProfile() {
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch("http://localhost:8000/api/profiles/profile/me/", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) throw new Error("프로필 정보 조회 실패");
+    const data = await response.json();
+
+    const usernameEl = document.querySelector(".username");
+    if (usernameEl) usernameEl.textContent = data.nickname || "닉네임 없음";
+
+    const pointEl = document.querySelector(".point");
+    if (pointEl) pointEl.textContent = `${data.point ?? 0}잎`;
+
+    const tagListEl = document.querySelector(".tag-list");
+    if (tagListEl && Array.isArray(data.interests)) {
+      tagListEl.innerHTML = "";
+      data.interests.forEach(tag => {
+        const span = document.createElement("span");
+        span.className = "tag";
+        span.textContent = tag;
+        tagListEl.appendChild(span);
+      });
+    }
+
+  } catch (err) {
+    console.error("❌ 사이드바 프로필 불러오기 실패:", err.message);
+  }
+}
