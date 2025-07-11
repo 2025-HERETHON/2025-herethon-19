@@ -99,6 +99,11 @@ submitButton.addEventListener('click', async () => {
   const content = contentInput.value.trim();
   const keywordSpans = document.querySelectorAll('.selected-keyword .text');
 
+  console.log("제목:", title);
+  console.log("내용:", content);
+  console.log("키워드 span 갯수:", keywordSpans.length);
+  console.log("각 키워드:", Array.from(keywordSpans).map(k => k.textContent.trim()));
+
   if (!title || !content || keywordSpans.length === 0) {
     alert("제목, 내용, 키워드를 모두 입력해주세요.");
     return;
@@ -134,5 +139,45 @@ submitButton.addEventListener('click', async () => {
     console.error("에러:", error);
     alert("게시글 등록 중 오류가 발생했습니다.");
   }
+
+  
 });
 
+
+async function loadSidebarProfile() {
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch("http://localhost:8000/api/profiles/profile/me/", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) throw new Error("프로필 정보 조회 실패");
+    const data = await response.json();
+
+    const usernameEl = document.querySelector(".username");
+    if (usernameEl) usernameEl.textContent = data.nickname || "닉네임 없음";
+
+    const pointEl = document.querySelector(".point");
+    if (pointEl) pointEl.textContent = `${data.point ?? 0}잎`;
+
+    const tagListEl = document.querySelector(".tag-list");
+    if (tagListEl && Array.isArray(data.interests)) {
+      tagListEl.innerHTML = "";
+      data.interests.forEach(tag => {
+        const span = document.createElement("span");
+        span.className = "tag";
+        span.textContent = tag;
+        tagListEl.appendChild(span);
+      });
+    }
+
+  } catch (err) {
+    console.error("❌ 사이드바 프로필 불러오기 실패:", err.message);
+  }
+}
+
+loadSidebarProfile();
