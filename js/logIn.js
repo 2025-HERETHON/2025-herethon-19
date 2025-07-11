@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // 로그인 버튼
   const loginButton = document.querySelector(".login-button");
-   // 회원가입 버튼 요소
+  // 회원가입 버튼 요소
   const signupButton = document.querySelector(".signup-button");
   const findButton = document.querySelector(".find-password");
 
@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("http://127.0.0.1:8000/api/accounts/login/", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password })  // 요청 본문
+        body: JSON.stringify({ email, password }), // 요청 본문
       });
 
       // 응답 JSON 파싱
@@ -35,8 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 로그인 후 이동
         console.log("페이지 이동 시도 중...");
-        window.location.href = "/community/communityMain.html";
-
+        window.location.href = " /community/communityMain.html";
       } else {
         // 요청은 보냈지만 인증 실패한 경우
         alert("로그인 실패: " + (data.detail || "아이디/비밀번호를 확인하세요"));
@@ -51,10 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "/join/joinMain.html";
   });
 
-    // 비밀번호 찾기 버튼 클릭 시 find.html로 이동
+  // 비밀번호 찾기 버튼 클릭 시 find.html로 이동
   findButton.addEventListener("click", () => {
-    window.location.href = "/password/find.html"; 
+    window.location.href = "/password/find.html";
   });
-
 });
-
