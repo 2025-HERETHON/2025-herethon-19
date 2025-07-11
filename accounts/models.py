@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
+        extra_fields.pop('interests', None)  
         if not email:
             raise ValueError("이메일은 필수입니다.")
         email = self.normalize_email(email)
