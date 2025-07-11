@@ -10,6 +10,7 @@ def create_test_users():
         {"email": "dbstj23145890@naver.com", "nickname": "김멘티", "user_type": "mentee"},
         {"email": "dbstj23145891@naver.com", "nickname": "박멘토", "user_type": "mentor"},
         {"email": "dbstj23145892@naver.com", "nickname": "이사용자", "user_type": "mentee"},
+        {"email": "dbstj2314589@naver.com", "nickname": "주계정", "user_type": "mentee"},  # 주 계정
     ]
     users = []
     for info in users_info:
@@ -19,7 +20,7 @@ def create_test_users():
                 password="Test1234!!",
                 nickname=info["nickname"],
                 user_type=info["user_type"],
-                point=50  # CustomUser에 필드 있을 때
+                point=50
             )
             profile = Profile.objects.create(user=user)
             interests_names = ["백엔드 개발", "데이터 분석", "마케팅"]
@@ -33,7 +34,8 @@ def create_test_users():
     return users
 
 def create_dummy_posts_and_comments(users):
-    author = users[0]  # 첫 번째 유저가 작성자
+    author = users[0]  # 첫 번째 유저가 게시글 작성자
+    user_main = next(u for u in users if u.email == "dbstj2314589@naver.com")
 
     dummy_posts_data = [
         {
@@ -90,27 +92,23 @@ def create_dummy_posts_and_comments(users):
                 keyword.save()
             post.keywords.add(keyword)
 
-        # 댓글 생성 (댓글 작성자는 첫 번째 유저 제외한 나머지 중 랜덤)
-        for comment_text in post_data.get("comments", []):
-            commenter = random.choice(users[1:])
+        # 댓글 생성: 주 계정과 다른 유저가 랜덤으로 댓글 달기
+        commenters = [user_main] + [u for u in users if u != user_main]
+        for idx, comment_text in enumerate(post_data.get("comments", [])):
+            commenter = commenters[idx % len(commenters)]
             Comment.objects.create(post=post, author=commenter, content=comment_text)
+
+        # 주 계정이 좋아요 누르기
+        post.likes.add(user_main)
+        post.like_count = post.likes.count()
+        post.save()
 
         created_posts.append(post)
 
     print("더미 게시글과 댓글 생성 완료")
     return created_posts
 
-def create_dummy_likes(users, posts):
-    # 두 번째 유저가 모든 게시글에 좋아요 누름
-    liker = users[1]
-    for post in posts:
-        post.likes.add(liker)
-        post.like_count = post.likes.count()
-        post.save()
-    print("더미 좋아요 생성 완료")
-
 def run_all():
     users = create_test_users()
     posts = create_dummy_posts_and_comments(users)
-    create_dummy_likes(users, posts)
     return posts
