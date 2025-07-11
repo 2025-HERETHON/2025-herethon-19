@@ -1,21 +1,39 @@
-# community/dummy_data.py
-
 from community.models import Post, Comment, Keyword
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
 def create_test_user():
-    if not User.objects.filter(email="dbstj2314@naver.com").exists():
-        User.objects.create_user(email="dbstj2314@naver.com", password="Test1234!!")
+    email = "dbstj2314589@naver.com"  # 통일된 이메일
+    if not User.objects.filter(email=email).exists():
+        User.objects.create_user(email=email, password="Test1234!!")
         print("테스트 계정 생성 완료.")
     else:
         print("이미 존재하는 테스트 계정입니다.")
 
 def create_dummy_posts_and_comments():
-    user = User.objects.get(email="dbstj231458@naver.com")
+    email = "dbstj2314589@naver.com"
+    user = User.objects.get(email=email)
 
     dummy_posts = [
+        {
+            "title": "시간 관리 질문드려요.",
+            "content": "효율적인 시간 관리를 위해 어떤 방법을 사용하시나요? 추천하는 앱이나 팁 있으면 알려주세요!",
+            "tags": ["시간관리", "생산성"],
+            "comments": [
+                "저는 토마토 타이머 기법을 사용해요!",
+                "시간 기록 앱 써보는 것도 추천합니다.",
+            ],
+        },
+        {
+            "title": "프론트엔드 스터디",
+            "content": "React, Vue, Angular 중 어떤 프레임워크로 스터디 시작하는 게 좋을까요?",
+            "tags": ["프론트엔드 개발", "스터디"],
+            "comments": [
+                "저는 React 추천해요. 자료도 많고 커뮤니티도 활발합니다.",
+                "Vue도 배우기 쉽고 좋은 것 같아요!",
+            ],
+        },
         {
             "title": "React와 TypeScript로 토이 프로젝트 함께할 분 모집합니다!",
             "content": "React와 TypeScript를 활용한 간단한 웹 앱을 만들고 싶습니다. 코드 리뷰와 피드백도 주고받으면서 함께 성장해봐요!",
@@ -53,7 +71,10 @@ def create_dummy_posts_and_comments():
         )
         # 태그 처리
         for tag_name in post_data["tags"]:
-            keyword, _ = Keyword.objects.get_or_create(name=tag_name, category="it")
+            keyword, created = Keyword.objects.get_or_create(name=tag_name, defaults={'category': 'it'})
+            if not created and keyword.category != "it":
+                keyword.category = "it"
+                keyword.save()
             post.keywords.add(keyword)
         # 댓글 처리
         for comment_text in post_data.get("comments", []):
