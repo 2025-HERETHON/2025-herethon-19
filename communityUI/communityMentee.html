@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>커뮤니티 글 작성(멘티) - Herizon</title>
+        <link rel="stylesheet" href="communityMentee.css">
+    </head>
+<body>
+
+    <!-- 헤더 -->
+<header class="header-container">
+    <div class="left">
+    <div class="header-logo">Herizon</div>
+    <nav class="header-nav">
+        <a href="#">커뮤니티</a>
+        <a href="#">멘토 탐색</a>
+        <a href="#">멘토챗</a>
+    </nav>
+    </div>
+    <div class="header-icon">
+        <a href="#">
+            <img src="/assets/headerProfile.svg" alt="프로필 아이콘" />
+        </a>
+    </div>
+</header>
+
+<!-- 커뮤니티 멘티 게시글 작성 -->
+
+<div class="content-wrapper">
+<div class="sidebar">
+  <img src="/assets/communityProfile.svg" alt="profile" class="profile-icon">
+  <div class="user-info">
+  <img src="/assets/leafIcon.svg" alt="leaf" class="leaf-icon">
+  <div class="username">김멘티</div>
+  </div>
+  <div class="point">190잎</div>
+  <div class="tag-wrapper">
+  <div class="tag-list">
+    <span class="tag">프론트엔드 개발</span>
+    <span class="tag">웹 개발</span>
+    <span class="tag">워킹맘</span>
+    <span class="tag">시간 관리</span>
+  </div>
+  </div>
+
+  <button class="sidebar-btn">프로필 사진 변경</button>
+  <button class="sidebar-btn logout">로그아웃</button>
+</div>
+
+<div class="write-container">
+    <h2 class="write-title">제목</h2>
+    <input type="text" class="write-input" placeholder="제목을 입력해주세요.">
+
+    <h2 class="write-title">키워드</h2>
+    <div class="keyword-wrapper">
+     <button class="keyword-add">+ 추가</button>
+     <div id="selectedKeywords" class="selected-keywords"></div>
+    </div>
+
+    <h2 class="write-title">내용</h2>
+    <textarea class="write-textarea" placeholder="구체적으로 궁금한 점이나 고민을 작성해주세요."></textarea>
+
+    <div class="writebutton">
+        <button class="btn-cancel">취소</button>
+        <button class="btn-submit">등록하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 키워드 팝업 모달 -->
+    <div id="keywordModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="modal-close" id="closeModal">&times;</span>
+    <h2 class="modal-title">키워드를 선택해주세요.</h2>
+
+    <div class="category">
+        <div class="category-title">IT / 개발</div>
+        <div class="tags2">
+            <div class="tag2">프론트엔드 개발</div>
+            <div class="tag2">백엔드 개발</div>
+            <div class="tag2">웹 개발</div>
+            <div class="tag2">앱 개발</div>
+            <div class="tag2">데이터 분석</div>
+            <div class="tag2">인공지능</div>
+        </div>
+    </div>
+
+     <div class="category">
+        <div class="category-title">비즈니스</div>
+        <div class="tags2">
+            <div class="tag2">기획</div>
+            <div class="tag2">마케팅</div>
+            <div class="tag2">PM</div>
+            <div class="tag2">창업</div>
+        </div>
+    </div>
+
+     <div class="category">
+        <div class="category-title">창의 / 콘텐츠</div>
+        <div class="tags2">
+            <div class="tag2">디자인</div>
+            <div class="tag2">UX/UI</div>
+            <div class="tag2">브랜딩</div>
+            <div class="tag2">콘텐츠 제작</div>
+        </div>
+    </div>
+
+     <div class="category">
+        <div class="category-title">커리어 / 라이프 전환</div>
+        <div class="tags2">
+            <div class="tag2">교육직 / 강사</div>
+            <div class="tag2">행정 / 사무</div>
+            <div class="tag2">고객 서비스</div>
+            <div class="tag2">워킹맘</div>
+            <div class="tag2">부캐 도전</div>
+            <div class="tag2">육아 이후 복귀</div>
+        </div>
+    </div>
+
+     <div class="category">
+        <div class="category-title">취업 / 이직 준비</div>
+        <div class="tags2">
+            <div class="tag2">자기소개서</div>
+            <div class="tag2">포트폴리오</div>
+            <div class="tag2">모의면접</div>
+            <div class="tag2">면접 코칭</div>
+            <div class="tag2">취업 준비</div>
+            <div class="tag2">이직 준비</div>
+            <div class="tag2">업무 스킬</div>
+        </div>
+    </div>
+
+     <div class="category">
+        <div class="category-title">자기 성장</div>
+        <div class="tags2">
+            <div class="tag2">시간 관리</div>
+            <div class="tag2">자기 계발</div>
+            <div class="tag2">공부 루틴</div>
+            <div class="tag2">멘탈 케어</div>
+            <div class="tag2">스터디</div>
+            <div class="tag2">커뮤니케이션</div>
+        </div>
+    </div>
+
+    <button class="modal-submit">완료</button>
+  </div>
+</div>
+
+  <!-- 푸터 -->
+<footer class="footer-container">
+    <div class="footer-logo">Herizon</div>
+    <div>
+    <div class="footer-info">
+        (주) 허라이즌 | 서울시 멋사구 멋사로, 19층 | 대표 : 김소망, 김윤서, 김은지, 손예원, 최윤영 | 사업자 등록번호 : 019-019-019<br>
+        통신판매업신고번호 제 2025-서울멋사-1919호<br>
+        직업정보제공사업신고 멋사청 2025-19호
+    </div>
+   <div class="footer-copyright">
+        Copyright by (주) 허라이즌, All right reserved
+   </div>
+    </div>
+</footer>
+
+<script src="/js/communityMenteeMento.js"></script>
+
+</body>
+</html>
