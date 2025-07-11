@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>커뮤니티 - Herizon</title>
+        <link rel="stylesheet" href="communityMain.css">
+    </head>
+<body>
+
+    <!-- 헤더 -->
+<header class="header-container">
+    <div class="left">
+    <div class="header-logo">Herizon</div>
+    <nav class="header-nav">
+        <a href="#">커뮤니티</a>
+        <a href="#">멘토 탐색</a>
+        <a href="#">멘토챗</a>
+    </nav>
+    </div>
+    <div class="header-icon">
+        <a href="#">
+            <img src="/assets/headerProfile.svg" alt="프로필 아이콘" />
+        </a>
+    </div>
+</header>
+
+<!-- 커뮤니티 메인 화면 -->
+<div class="content-wrapper">
+<!-- 사이드 바 -->
+<div class="sidebar">
+  <img src="/assets/communityProfile.svg" alt="profile" class="profile-icon">
+  <div class="user-info">
+  <img src="/assets/leafIcon.svg" alt="leaf" class="leaf-icon">
+  <div class="username">김멘티</div>
+  </div>
+  <div class="point">190잎</div>
+  <div class="tag-wrapper">
+  <div class="tag-list">
+    <span class="tag">프론트엔드 개발</span>
+    <span class="tag">웹 개발</span>
+    <span class="tag">워킹맘</span>
+    <span class="tag">시간 관리</span>
+  </div>
+  </div>
+
+  <button class="sidebar-btn">프로필 사진 변경</button>
+  <button class="sidebar-btn logout">로그아웃</button>
+</div>
+
+<!-- 메인 콘텐츠 -->
+<div class="community-main">
+    <!-- 검색바 / 글쓰기 아이콘 -->
+    <div class="community-top">
+        <div class="search-container">
+        <input type="text" class="community-search" placeholder="검색어를 입력해주세요."/>
+        <button class="search-btn">
+            <img src="/assets/search.svg" alt="search"/>
+        </button>
+        </div>
+        <button class="write-btn">
+            <img src="/assets/writeIcon.svg" alt="write" />
+        </button>
+    </div>
+
+    <!-- 게시글 리스트 -->
+    <div class="post-list">
+        <div class="post-card">
+            <div class="post-header">
+            <div class="post-title">시간관리 질문드려요.</div>
+            <div class="post-tag">
+                <span class="tag">프론트엔드</span>
+                <span class="tag">워킹맘</span>
+                <span class="tag">스터디</span>
+            </div>
+            </div>
+            <div class="post-content">
+                <p>안녕하세요~ 처음으로 게시글 올려봅니다 ^^
+                    아이가 이제 초등학교에 들어가서 재취업하려고 합니다.
+                    한빛미디어 교재로 프론트엔드 기초부터 다져보려고 하는데...
+                </p>
+            </div>
+            <div class="post-meta">
+                    <img src="/assets/heartNone.svg" id="heartIcon" alt="heart" class="heart-icon"/>
+                    <span id="likeCount">5</span>
+                    <img src="/assets/commentIcon.svg" alt="comment" class="comment-icon"/>
+                    <span>2</span>
+                <span class="divider"></span>
+                <div class="info">
+                    <span>2025.07.01</span>
+                    <span class="divider"></span>
+                    <span>김멘티</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+        <span class="page active">1</span>
+        <span class="page">2</span>
+        <span class="page">3</span>
+    </div>
+</div>
+
+</div>
+ 
+
+  <!-- 푸터 -->
+<footer class="footer-container">
+    <div class="footer-logo">Herizon</div>
+    <div>
+    <div class="footer-info">
+        (주) 허라이즌 | 서울시 멋사구 멋사로, 19층 | 대표 : 김소망, 김윤서, 김은지, 손예원, 최윤영 | 사업자 등록번호 : 019-019-019<br>
+        통신판매업신고번호 제 2025-서울멋사-1919호<br>
+        직업정보제공사업신고 멋사청 2025-19호
+    </div>
+   <div class="footer-copyright">
+        Copyright by (주) 허라이즌, All right reserved
+   </div>
+    </div>
+</footer>
+
+<!-- 프리미엄 구독 모달 -->
+<div class="modal-overlay">
+  <div class="premium-modal">
+    <button class="modal-close">&times;</button>
+
+    <h2 class="modal-title">더 많은 기능을 원하시나요?</h2>
+    <p class="modal-subtitle">Herizon의 프리미엄 기능을 지금 바로 이용해보세요!</p>
+
+    <div class="modal-table">
+      <div class="row header">
+        <div class="cell">항목</div>
+        <div class="cell">Free (무료)</div>
+        <div class="cell">Pro (프리미엄)</div>
+      </div>
+      <div class="row-divider"></div>
+      <div class="row">
+        <div class="cell">1:1 채팅</div>
+        <div class="cell">주 5회 제한</div>
+        <div class="cell">무제한</div>
+      </div>
+      <div class="row">
+        <div class="cell">리뷰 보기</div>
+        <div class="cell">월 5회 제한</div>
+        <div class="cell">무제한</div>
+      </div>
+      <div class="row">
+        <div class="cell">멘토링 요청</div>
+        <div class="cell">최대 3명의 멘토</div>
+        <div class="cell">최대 10명의 멘토</div>
+      </div>
+      <div class="row">
+        <div class="cell">우선 답변 대상</div>
+        <div class="cell">X</div>
+        <div class="cell">우선 순위 보장</div>
+      </div>
+      <div class="row">
+        <div class="cell">광고 제거</div>
+        <div class="cell">X</div>
+        <div class="cell">O</div>
+      </div>
+      <div class="row">
+        <div class="cell">가격</div>
+        <div class="cell">0</div>
+        <div class="cell">₩3,900</div>
+      </div>
+    </div>
+
+    <button class="upgrade-btn">프리미엄 업그레이드</button>
+    <p class="modal-footer">
+      언제든 구독을 취소하실 수 있습니다.<br />
+      다음 결제일까지 계속 이용 가능합니다.
+    </p>
+  </div>
+</div>
+
+
+
+<script src="/js/communityMain.js"></script>
+
+</body>
+</html>

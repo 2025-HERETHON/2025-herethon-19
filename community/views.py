@@ -12,6 +12,9 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from point.models import PointHistory
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.exceptions import NotFound
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class PostListView(generics.ListAPIView):
     queryset = Post.objects.all().order_by('-created_at')
@@ -20,6 +23,8 @@ class PostListView(generics.ListAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'content']
 
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 class PostCreateAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -36,18 +41,26 @@ class PostDetailView(RetrieveAPIView):
     serializer_class = PostDetailSerializer
 
 # 댓글 작성
-class CommentCreateView(APIView):
-    permission_classes = [IsAuthenticated]
+class CommentCreateView(generics.ListCreateAPIView):
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def post(self, request, post_id):
+    def get_queryset(self):
+        post_id = self.kwargs['post_id']
+        # Post 존재 여부 확인
+        try:
+            post = Post.objects.get(id=post_id)
+        except Post.DoesNotExist:
+            raise NotFound("Post not found")
+        return Comment.objects.filter(post=post).order_by('-created_at')
+
+    def perform_create(self, serializer):
+        post_id = self.kwargs['post_id']
         post = Post.objects.get(id=post_id)
-        serializer = CommentSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(post=post, author=request.user)
-            post.comment_count = post.comment_set.count()
-            post.save()
-            return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
+        serializer.save(author=self.request.user, post=post)
+        # 댓글 수 갱신
+        post.comment_count = post.comment_set.count()
+        post.save()
 
 # 좋아요 토글
 @api_view(['POST'])

@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from .models import MentorVerification, Interest
 from django.contrib.auth import get_user_model
 from .serializers import InterestSerializer, MentorVerificationUpdateSerializer
+from profiles.models import Profile
 # Create your views here.
 
 User = get_user_model()
@@ -143,11 +144,13 @@ class MyProfileSimpleView(APIView):
 
     def get(self, request):
         user = request.user
-        profile = user.profile  
+        try:
+            profile = user.profile
+        except Profile.DoesNotExist:
+            return Response({"detail": "프로필 정보가 존재하지 않습니다."}, status=status.HTTP_404_NOT_FOUND)
 
         return Response({
             "nickname": user.nickname,
             "interests": [interest.name for interest in profile.interests.all()],
             "point": user.point
         })
-
