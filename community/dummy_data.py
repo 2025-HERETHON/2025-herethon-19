@@ -5,9 +5,6 @@ from profiles.models import Profile, Interest
 
 User = get_user_model()
 
-# 좋아요 모델 import (예시)
-from community.models import Like  # 실제 프로젝트에 맞게 경로 및 모델명 수정 필요
-
 def create_test_users():
     users_info = [
         {"email": "dbstj23145890@naver.com", "nickname": "김멘티", "user_type": "mentee"},
@@ -22,7 +19,7 @@ def create_test_users():
                 password="Test1234!!",
                 nickname=info["nickname"],
                 user_type=info["user_type"],
-                point=50
+                point=50  # CustomUser에 필드 있을 때
             )
             profile = Profile.objects.create(user=user)
             interests_names = ["백엔드 개발", "데이터 분석", "마케팅"]
@@ -36,8 +33,7 @@ def create_test_users():
     return users
 
 def create_dummy_posts_and_comments(users):
-    author = users[0]  # 첫 번째 유저가 게시글 작성자 (김멘티)
-    other_users = users[1:]  # 다른 유저들
+    author = users[0]  # 첫 번째 유저가 작성자
 
     dummy_posts_data = [
         {
@@ -45,8 +41,8 @@ def create_dummy_posts_and_comments(users):
             "content": "효율적인 시간 관리를 위해 어떤 방법을 사용하시나요? 추천하는 앱이나 팁 있으면 알려주세요!",
             "tags": ["시간관리", "생산성"],
             "comments": [
-                {"author": author, "content": "저는 토마토 타이머 기법을 사용해요!"},
-                {"author": other_users[0], "content": "시간 기록 앱 써보는 것도 추천합니다."},
+                "저는 토마토 타이머 기법을 사용해요!",
+                "시간 기록 앱 써보는 것도 추천합니다.",
             ],
         },
         {
@@ -54,8 +50,8 @@ def create_dummy_posts_and_comments(users):
             "content": "React, Vue, Angular 중 어떤 프레임워크로 스터디 시작하는 게 좋을까요?",
             "tags": ["프론트엔드 개발", "스터디"],
             "comments": [
-                {"author": author, "content": "저는 React 추천해요. 자료도 많고 커뮤니티도 활발합니다."},
-                {"author": other_users[1], "content": "Vue도 배우기 쉽고 좋은 것 같아요!"},
+                "저는 React 추천해요. 자료도 많고 커뮤니티도 활발합니다.",
+                "Vue도 배우기 쉽고 좋은 것 같아요!",
             ],
         },
         {
@@ -63,8 +59,8 @@ def create_dummy_posts_and_comments(users):
             "content": "Context API, Redux, Zustand 등 고민이 많아졌습니다. 여러분은 어떻게 상태 관리하시나요?",
             "tags": ["프론트엔드 개발"],
             "comments": [
-                {"author": author, "content": "저도 함께 공부하고 싶어요! 미팅 일정 어떻게 정하실 건가요?"},
-                {"author": other_users[0], "content": "상태 관리 라이브러리 추천 부탁드립니다."},
+                "저도 함께 공부하고 싶어요! 미팅 일정 어떻게 정하실 건가요?",
+                "상태 관리 라이브러리 추천 부탁드립니다.",
             ],
         },
         {
@@ -72,8 +68,8 @@ def create_dummy_posts_and_comments(users):
             "content": "Lighthouse 점수에 집착하는 게 맞는 걸까요? 사용자 경험에 더 집중해야 할까요?",
             "tags": ["프론트엔드 개발"],
             "comments": [
-                {"author": author, "content": "성능 최적화는 이미지 최적화부터 시작하는 게 좋다고 들었어요."},
-                {"author": other_users[1], "content": "디자인 시스템 고민 공감합니다. 작은 프로젝트라도 미리 도입해두면 편해요."},
+                "성능 최적화는 이미지 최적화부터 시작하는 게 좋다고 들었어요.",
+                "디자인 시스템 고민 공감합니다. 작은 프로젝트라도 미리 도입해두면 편해요.",
             ],
         },
     ]
@@ -94,25 +90,27 @@ def create_dummy_posts_and_comments(users):
                 keyword.save()
             post.keywords.add(keyword)
 
-        # 댓글 생성
-        for comment_info in post_data.get("comments", []):
-            Comment.objects.create(
-                post=post,
-                author=comment_info["author"],
-                content=comment_info["content"]
-            )
-        
+        # 댓글 생성 (댓글 작성자는 첫 번째 유저 제외한 나머지 중 랜덤)
+        for comment_text in post_data.get("comments", []):
+            commenter = random.choice(users[1:])
+            Comment.objects.create(post=post, author=commenter, content=comment_text)
+
         created_posts.append(post)
 
-    # 좋아요(Like) 생성 — 첫 번째 유저가 모든 게시글 중 절반 정도 좋아요 누른 상태로 만들기 (예시)
-    for post in created_posts[:len(created_posts)//2]:
-        Like.objects.get_or_create(user=author, post=post)
-
-    print("더미 게시글, 댓글, 좋아요 생성 완료")
+    print("더미 게시글과 댓글 생성 완료")
     return created_posts
+
+def create_dummy_likes(users, posts):
+    # 두 번째 유저가 모든 게시글에 좋아요 누름
+    liker = users[1]
+    for post in posts:
+        post.likes.add(liker)
+        post.like_count = post.likes.count()
+        post.save()
+    print("더미 좋아요 생성 완료")
 
 def run_all():
     users = create_test_users()
     posts = create_dummy_posts_and_comments(users)
+    create_dummy_likes(users, posts)
     return posts
-
