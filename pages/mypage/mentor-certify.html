@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mentor-certify</title>
+    <link rel="stylesheet" href="../../components/HeadFooter.css" />
+    <link rel="stylesheet" href="../css/mentor-certify.css" />
+  </head>
+ 
+  <body>
+    <!-- 헤더 -->
+    <header class="header-container">
+      <div class="left">
+        <div class="header-logo">Herizon</div>
+        <nav class="header-nav">
+          <a href="#">커뮤니티</a>
+          <a href="#">멘토 탐색</a>
+          <a href="#">멘토챗</a>
+        </nav>
+      </div>
+
+      <div class="right">
+        <div class="header-icon">
+          <a href="../pages/my-mentee.html">
+            <img src="../../components/img/iconoir_profile-circle.svg" alt="프로필 아이콘" />
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 본문 (공백 영역) -->
+    <main class="main-placeholder">
+      <main class="container">
+        <!-- 왼쪽 -->
+        <aside class="my-info-cnt">
+          <img class="profile-img" src="../img/profile.svg" />
+
+          <div class="info">
+            <div class="LvAndName">
+              <img class="lv-icon" src="../img/menteeLv.svg" />
+              <span>김멘티</span>
+            </div>
+            <p class="leaf-count">190잎</p>
+          </div>
+
+          <div class="tag-list">
+            <span class="tag">프론트엔드 개발</span>
+            <span class="tag">웹 개발</span>
+            <span class="tag">워킹맘</span>
+            <span class="tag">시간 관리</span>
+          </div>
+
+          <!-- 버튼 묶음 -->
+          <div class="btn-wrapper">
+            <button class="profile-btn">프로필 사진 변경</button>
+            <button class="logout-btn">로그아웃</button>
+          </div>
+        </aside>
+
+        <!-- 오른쪽 -->
+        <div class="right-aside-cnt">
+          <h2 class="section-title">멘토링 활동 &gt; 멘토 인증</h2>
+        
+          <div class="card-box">
+            <p class="form-title">멘토로 전환하려면 아래의 정보를 입력해주세요.</p>
+            <p class="form-subtitle">멘토링 진행 가능한 분야를 선택해주세요.</p>
+        
+            <!-- 분야별 태그 -->
+            <div class="category-group">
+              <h3>IT / 개발</h3>
+              <div class="tag-box">
+                <span class="tag-certify">프론트엔드 개발</span>
+                <span class="tag-certify">백엔드 개발</span>
+                <span class="tag-certify">웹 개발</span>
+                <span class="tag-certify">앱 개발</span>
+                <span class="tag-certify">데이터 분석</span>
+                <span class="tag-certify">인공지능</span>
+              </div>
+        
+              <h3>비즈니스</h3>
+              <div class="tag-box">
+                <span class="tag-certify">기획</span>
+                <span class="tag-certify">마케팅</span>
+                <span class="tag-certify">PM</span>
+                <span class="tag-certify">창업</span>
+              </div>
+        
+              <h3>창의 / 콘텐츠</h3>
+              <div class="tag-box">
+                <span class="tag-certify">디자인</span>
+                <span class="tag-certify">UX/UI</span>
+                <span class="tag-certify">브랜딩</span>
+                <span class="tag-certify">콘텐츠 제작</span>
+              </div>
+        
+              <h3>커리어 / 라이프 전환</h3>
+              <div class="tag-box">
+                <span class="tag-certify">교육직 / 강사</span>
+                <span class="tag-certify">행정 / 사무</span>
+                <span class="tag-certify">고객 서비스</span>
+                <span class="tag-certify">워킹맘</span>
+                <span class="tag-certify">부캐 도전</span>
+                <span class="tag-certify">육아 이후 복귀</span>
+              </div>
+        
+              <h3>취업 / 이직 준비</h3>
+              <div class="tag-box">
+                <span class="tag-certify">자기소개서</span>
+                <span class="tag-certify">포트폴리오</span>
+                <span class="tag-certify">모의면접</span>
+                <span class="tag-certify">면접 코칭</span>
+                <span class="tag-certify">취업 준비</span>
+                <span class="tag-certify">이직 준비</span>
+                <span class="tag-certify">업무 스킬</span>
+              </div>
+        
+              <h3>자기 성장</h3>
+              <div class="tag-box">
+                <span class="tag-certify">시간 관리</span>
+                <span class="tag-certify">자기 계발</span>
+                <span class="tag-certify">공부 루틴</span>
+                <span class="tag-certify">멘탈 케어</span>
+                <span class="tag-certify">스터디</span>
+                <span class="tag-certify">커뮤니케이션</span>
+              </div>
+            </div>
+        
+            <!-- 업로드 -->
+            <div class="upload-section">
+              <p class="upload-label">
+                경력 / 자격증 등 증빙 자료를 업로드해주세요.<br />
+                <small>(인증을 완료하지 않으면 멘토 활동이 불가능합니다.)</small>
+              </p>
+            
+              <div class="upload-controls">
+                <label class="upload-btn">
+                  <input type="file" id="fileInput" multiple hidden />
+                  업로드하기
+                </label>
+            
+                <!-- 업로드된 파일 리스트 -->
+                <div id="fileList" class="file-list"></div>
+              </div>
+            </div>
+
+            <!-- 자기소개 -->
+            <div class="textarea-section">
+              <label for="intro">자기소개를 간단히 작성해주세요. (선택)</label>
+              <textarea id="intro" maxlength="500" placeholder="경력, 멘토링 계기, 멘티에게 하고 싶은 말 등"></textarea>
+              <div class="char-count">0/500</div>
+            </div>
+        
+            <button class="submit-btn">멘토 인증</button>
+          </div>
+        </div>
+        
+      </main>
+    <footer class="footer-container">
+      <div class="footer-logo">Herizon</div>
+      <div>
+        <div class="footer-info">
+          (주) 허라이즌 | 서울시 멋사구 멋사로, 19층 | 대표 : 김소망, 김윤서, 김은지, 손예원, 최윤영 | 사업자 등록번호 : 019-019-019<br />
+          통신판매업신고번호 제 2025-서울멋사-1919호<br />
+          직업정보제공사업신고 멋사청 2025-19호
+        </div>
+        <div class="footer-copyright">Copyright by (주) 허라이즌, All right reserved</div>
+      </div>
+    </footer>
+    <script>
+      const fileInput = document.getElementById("fileInput");
+      const fileList = document.getElementById("fileList");
+  
+      fileInput.addEventListener("change", (e) => {
+        const files = Array.from(e.target.files);
+  
+        files.forEach((file) => {
+          const chip = document.createElement("div");
+          chip.className = "file-chip";
+  
+          const name = document.createElement("span");
+          name.textContent = file.name;
+  
+          const remove = document.createElement("button");
+          remove.className = "remove-btn";
+          remove.textContent = "✕";
+          remove.onclick = () => chip.remove();
+  
+          chip.appendChild(name);
+          chip.appendChild(remove);
+          fileList.appendChild(chip);
+        });
+  
+        // 선택 초기화 (같은 파일도 다시 올릴 수 있게)
+        fileInput.value = "";
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+    const tags = document.querySelectorAll(".tag-certify");
+
+    tags.forEach((tag) => {
+      tag.addEventListener("click", () => {
+        tag.classList.toggle("selected");
+      });
+    });
+
+    // (선택사항) 파일 업로드 JS도 여기에 같이 작성 가능
+  });
+    </script>
+  </body>
+
+</html>
