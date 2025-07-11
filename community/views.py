@@ -29,7 +29,7 @@ class PostCreateAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        serializer = PostCreateSerializer(data=request.data, context={'author': request.user})
+        serializer = PostCreateSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             post = serializer.save()
             result_serializer = PostSerializer(post)
